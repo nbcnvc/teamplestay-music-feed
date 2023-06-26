@@ -1,7 +1,12 @@
+import React, { useEffect } from "react";
+import { auth } from "./services/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 function App() {
-  return (
-    <h2>music feed</h2>
-  );
+  useEffect(() => {
+    createUserWithEmailAndPassword();
+  }, []);
+  return <div>firebase</div>;
 }
 
 export default App;
