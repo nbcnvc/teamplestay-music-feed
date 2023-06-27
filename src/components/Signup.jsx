@@ -39,6 +39,8 @@ const Signup = () => {
     dispatch(authApiAction.actionRequestedSignup());
     await signup(email, pw);
     dispatch(authApiAction.actionSuccessSignup());
+    // alert(`${email}과 ${pw}로 회원가입을 합니다`);
+    alert(`회원가입에 성공하셨습니다.`);
   };
 
   return (
@@ -48,7 +50,7 @@ const Signup = () => {
         <StyledInput id="email" onChange={changeEmailHandler} value={email} />
         <StyledLabel htmlFor="pw">비밀번호</StyledLabel>
         <StyledInput id="pw" onChange={changePwHandler} value={pw} />
-        <Button>제출</Button>
+        <Button>회원가입</Button>
       </form>
     </>
   );
