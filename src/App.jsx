@@ -1,12 +1,9 @@
-import Signup from "./components/Signup";
+import {  RouterProvider } from "react-router-dom";
+
+import router from "./router";
 
 function App() {
-  return (
-    <>
-      <h2>music feed</h2>
-      <Signup />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
