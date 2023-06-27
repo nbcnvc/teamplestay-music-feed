@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { auth } from "../services/firebase";
+
 import Button from "./ui/Button";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { authApiAction } from "../redux/slices/apiSlices/authApiSlice/authApiSlice";
+import { signin } from "../services/authentication";
 
 const StyledLabel = styled.label``;
 const StyledInput = styled.input``;
@@ -17,7 +17,7 @@ const validateInput = (email, pw) => {
   return true;
 };
 
-const Login = () => {
+const Signin = () => {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
@@ -39,11 +39,8 @@ const Login = () => {
     dispatch(authApiAction.actionRequestedLogin());
 
     try {
-      await signInWithEmailAndPassword(auth, email, pw);
+      await signin(email, pw);
       dispatch(authApiAction.actionSuccessLogin());
-      console.log("로그인에 성공하였습니다.");
-      console.log("이메일:", email); // Log email to the console
-      console.log("비밀번호:", pw); // Log password to the console
       alert(`로그인에 성공하셨습니다.`);
     } catch (error) {
       console.log(error);
@@ -75,4 +72,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signin;

@@ -28,12 +28,10 @@ const authApiSlice = createSlice({
     actionRequestedLogin(state) {
       state.isLoading = true;
     },
-
     actionSuccessLogin(state) {
       state.isLoading = false;
       state.isAuthenticated = true;
     },
-
     actionFailedLogin(state, action) {
       state.isLoading = false;
       state.error = action.payload;
