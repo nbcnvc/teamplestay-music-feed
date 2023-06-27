@@ -18,4 +18,4 @@ export const signin = async (email, pw) => {
 
 export const signout = async () => {
   await signOut(auth);
-}
+};
