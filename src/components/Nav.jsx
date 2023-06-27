@@ -7,8 +7,9 @@ const Nav = () => {
   return (
     <>
       <div>
-        {isAuthenticated ? '로그아웃' : <Link to='auth/signup'>signup</Link>}
-        <Link to='auth/profile'>profile</Link>
+        {isAuthenticated ? '로그아웃' : <Link to='auth/signup'>signup </Link>}
+        <Link to='auth/profile'>profile </Link>
+        <Link to='auth/signin'>signin </Link>
       </div>
     </>
   );
