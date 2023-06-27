@@ -1,14 +1,10 @@
-import { useState } from "react";
-// import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { collection, getDocs, query } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { addDoc, collection, getDocs, query } from "firebase/firestore";
 import { db } from "../services/firebase";
 
 function Posts() {
-  //   const [name, setName] = useState("");
-  //   const [artist, setArtist] = useState("");
-  //   const [title, setTitle] = useState("");
-  //   const [contents, setContents] = useState("");
+  const [name, setName] = useState("");
+  const [artist, setArtist] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,76 +12,53 @@ function Posts() {
       querySnapshot.forEach((doc) => {
         const data = doc.data();
         const name = data.name;
+        const artist = data.artist;
         const title = data.title;
-        console.log(`${doc.id} => ${(name, title)}`);
+        const contents = data.contents;
+
+        console.log(`${doc.id} => ${name}`);
+        console.log(`${doc.id} => ${artist}`);
       });
     };
     fetchData();
   }, []);
 
-  //   const [posts, setPosts] = useState([
-  //     { text: "할일 1", isDone: false, id: 1 },
-  //     { text: "할일 2", isDone: false, id: 2 },
-  //   ]);
+  const [posts, setPosts] = useState([]);
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       const q = query(collection(db, "posts"));
-  //       const querySnapshot = await getDocs(q);
+  const addPost = async (event) => {
+    event.preventDefault();
+    const newPost = { name: name, airtist: artist };
+    setPosts((prev) => {
+      return [...posts, newPost];
+    });
+    setName("");
+    setArtist("");
 
-  //       const initialPosts = [];
-
-  //       querySnapshot.forEach((doc) => {
-  //         const data = {
-  //           id: doc.id,
-  //           ...doc.data(),
-  //         };
-  //         console.log(data);
-  //         initialPosts.push(data);
-  //       });
-
-  //       setPosts(initialPosts);
-  //     };
-  //   });
+    const collectionRef = collection(db, "posts");
+    await addDoc(collectionRef, newPost);
+  };
 
   return (
     <div>
-      posts
-      {/* <form
-        onSubmit={(post) => {
-          alert(1);
-        }}
-      >
+      <form onSubmit={addPost}>
         <input
-          type="test"
+          type="text"
           name="name"
+          value={name}
           onChange={(e) => {
             setName(e.target.value);
           }}
         />
         <input
-          type="test"
+          type="text"
           name="artist"
+          value={artist}
           onChange={(e) => {
             setArtist(e.target.value);
           }}
         />
-        <input
-          type="test"
-          name="title"
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-        />
-        <input
-          type="test"
-          name="contents"
-          onChange={(e) => {
-            setContents(e.target.value);
-          }}
-        />
         <button>등록하기</button>
-      </form> */}
+      </form>
     </div>
   );
 }
