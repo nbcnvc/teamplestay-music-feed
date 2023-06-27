@@ -50,6 +50,7 @@ function Posts() {
 
   return (
     <div>
+      posts
       {/* <form
         onSubmit={(post) => {
           alert(1);
