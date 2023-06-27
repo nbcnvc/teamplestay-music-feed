@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getDataFromFS } from "../services/firestore";
+import { createData, getDataFromFS } from "../services/firestore";
 
 function Posts() {
   const [posts, setPosts] = useState([]);
@@ -18,18 +18,17 @@ function Posts() {
     fetchData();
   }, []);
 
-  // const addHandler = async (event) => {
-  //   event.preventDefault();
-  //   const newPost = { name: name, artist: artist };
-  //   setPosts((prev) => {
-  //     return [...posts, newPost];
-  //   });
-  //   setName("");
-  //   setArtist("");
-  //
-  //   const collectionRef = collection(db, "posts");
-  //   await addDoc(collectionRef, newPost);
-  // };
+  const addHandler = async (event) => {
+    event.preventDefault();
+    const newPost = { title: name };
+    setPosts((prev) => {
+      return [...prev, newPost];
+    });
+    setName("");
+    setArtist("");
+
+    createData(newPost);
+  };
 
   return (
     <div>
@@ -39,7 +38,7 @@ function Posts() {
           <p key={p.id}>{p.title}</p>
         ))}
       </div>
-      <form>
+      <form onSubmit={addHandler}>
         <input
           type="text"
           name="name"
