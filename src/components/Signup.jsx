@@ -49,7 +49,12 @@ const Signup = () => {
         <StyledLabel htmlFor="email">이메일</StyledLabel>
         <StyledInput id="email" onChange={changeEmailHandler} value={email} />
         <StyledLabel htmlFor="pw">비밀번호</StyledLabel>
-        <StyledInput id="pw" onChange={changePwHandler} value={pw} />
+        <StyledInput
+          id="pw"
+          onChange={changePwHandler}
+          value={pw}
+          type="password"
+        />
         <Button>회원가입</Button>
       </form>
     </>
