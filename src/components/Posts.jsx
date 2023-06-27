@@ -45,15 +45,6 @@ function Posts() {
     setArtist("");
   };
 
-  // const deletePost = async () => {
-  //   const postRef = doc(db, "posts", posts.id);
-  //   await deleteDoc(postRef);
-
-  //   setPosts((prev) => {
-  //     return prev.filter((post) => post.id !== posts.id);
-  //   });
-  // };
-
   return (
     <div>
       <form onSubmit={addPost}>
