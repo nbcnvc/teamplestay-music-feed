@@ -16,7 +16,6 @@ function Posts() {
         const item = doc.data();
         return { id: doc.id, ...item };
       });
-      console.log('fetched=', fetchedData)
       dispatch(postsApiAction.actionUpdateAllPosts(fetchedData));
     };
     fetchData();
