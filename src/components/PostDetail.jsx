@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { styled } from "styled-components";
 
 const PostDetail = () => {
   const location = useLocation();
@@ -29,8 +30,8 @@ const PostDetail = () => {
   };
 
   return (
-    <>
-      <h1>오늘의 pick</h1>
+    <Container>
+      <h1>⭐오늘의 pick⭐</h1>
       {isEditing ? (
         <form>
           <label>
@@ -73,8 +74,14 @@ const PostDetail = () => {
           </button>
         </>
       )}
-    </>
+    </Container>
   );
 };
 
 export default PostDetail;
+
+const Container = styled.nav`
+
+
+  }
+`;
