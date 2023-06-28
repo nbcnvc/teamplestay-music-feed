@@ -28,17 +28,21 @@ const Profile = () => {
     // Define your handleEdit logic here
   };
 
+  // useEffect(() => {
+  //   if (downloadURL !== "") {
+  //     const imageContainer = document.querySelector(".image-container");
+
+  //     // 기존의 내용을 지우고 새로운 이미지를 넣습니다.
+  //     imageContainer.innerHTML = `<img src="${downloadURL}" />`;
+  //   }
+  // }, [downloadURL]);
+
   useEffect(() => {
     if (downloadURL !== "") {
-      // 이미지가 업로드된 후에 실행되도록 useEffect를 사용합니다.
-      // downloadURL 값이 변경될 때마다 이미지를 업데이트합니다.
-      const img = new Image();
-      img.src = downloadURL;
-      document.body.appendChild(img);
       const imageContainer = document.querySelector(".image-container");
+
       // 기존의 내용을 지우고 새로운 이미지를 넣습니다.
-      imageContainer.innerHTML = "";
-      imageContainer.appendChild(img);
+      imageContainer.innerHTML = `<img src="${downloadURL}" />`;
     }
   }, [downloadURL]);
 
@@ -67,7 +71,9 @@ const Profile = () => {
         <input type="file" onChange={handleFileSelect} />
         <button onClick={handleUpload}>Upload</button>
         <button onClick={handleEdit}>수정하기</button>
-        <div className="image-container"></div>
+        <div style={{ width: "300px" }} className="image-container">
+          <StImage src={downloadURL} alt="Uploaded Image" />
+        </div>
       </div>
     </div>
   );
@@ -84,3 +90,10 @@ const Container = styled.div`
   justify-content: center;
   gap: 30px;
 `;
+
+const StImage = styled.img`
+  width: 100%;
+  height: auto;
+`;
+
+// #root > main > div > div:nth-child(4) > div > img
