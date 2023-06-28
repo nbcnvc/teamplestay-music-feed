@@ -6,6 +6,7 @@ import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
 import { getDataFromFS } from "../services/firestore";
 
 import Post from "./Post";
+import NewPost from "./NewPost";
 
 function Posts() {
   const dispatch = useDispatch();
@@ -25,11 +26,14 @@ function Posts() {
   }, []);
 
   return (
-    <Container>
-      {posts.map((post) => (
-        <Post post={post} key={post.id} />
-      ))}
-    </Container>
+    <>
+      <NewPost />
+      <Container>
+        {posts.map((post) => (
+          <Post post={post} key={post.id} />
+        ))}
+      </Container>
+    </>
   );
 }
 
