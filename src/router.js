@@ -12,6 +12,10 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
+        index: true,
+        element: <Posts />,
+      },
+      {
         path: "auth/profile/",
         element: <Profile />,
       },
@@ -22,10 +26,6 @@ const router = createBrowserRouter([
       {
         path: "auth/signin/",
         element: <Signin />,
-      },
-      {
-        path: "auth/posts/",
-        element: <Posts />,
       },
     ],
   },

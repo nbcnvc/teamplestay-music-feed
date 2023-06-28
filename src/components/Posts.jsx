@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState, useEffect } from "react";
 import {
   addDoc,
@@ -15,6 +16,18 @@ function Posts() {
 
   const [name, setName] = useState("");
   const [artist, setArtist] = useState("");
+=======
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
+import { getDataFromFS } from "../services/firestore";
+
+function Posts() {
+  const dispatch = useDispatch();
+
+  const posts = useSelector((state) => state.postsApi.posts);
+>>>>>>> d98faaf4d011d7dd32144cb2a68bc8f7904df7e6
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,11 +39,17 @@ function Posts() {
       querySnapshot.forEach((doc) => {
         initialPosts.push({ id: doc.id, ...doc.data() });
       });
+<<<<<<< HEAD
       setPosts(initialPosts);
+=======
+      console.log('fetched=', fetchedData)
+      dispatch(postsApiAction.actionUpdateAllPosts(fetchedData));
+>>>>>>> d98faaf4d011d7dd32144cb2a68bc8f7904df7e6
     };
     fetchData();
   }, []);
 
+<<<<<<< HEAD
   const addPost = async (event) => {
     event.preventDefault();
     const newPost = { name: name, artist: artist };
@@ -90,6 +109,14 @@ function Posts() {
           );
         })}
       </div>
+=======
+  return (
+    <div>
+      <h2>posts list</h2>
+      {posts.map((p) => (
+        <p key={p.id}>{p.title}</p>
+      ))}
+>>>>>>> d98faaf4d011d7dd32144cb2a68bc8f7904df7e6
     </div>
   );
 }
