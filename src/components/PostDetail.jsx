@@ -80,8 +80,4 @@ const PostDetail = () => {
 
 export default PostDetail;
 
-const Container = styled.nav`
-
-
-  }
-`;
+const Container = styled.nav``;

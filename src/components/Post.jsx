@@ -10,7 +10,7 @@ const Post = ({ post }) => {
     navigate(`posts/${post.id}`, {
       state: {
         post: post,
-      }
+      },
     });
   };
 

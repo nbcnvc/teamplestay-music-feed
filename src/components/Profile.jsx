@@ -2,7 +2,6 @@ import Card from "./ui/Card";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { auth } from "../services/firebase";
-import NewPost from "./NewPost";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useState, useEffect } from "react";
 import { storage } from "../services/firebase";
@@ -11,51 +10,84 @@ const Profile = () => {
   const posts = useSelector((state) => state.postsApi.posts);
   const [selectedFile, setSelectedFile] = useState(null);
   const [downloadURL, setDownloadURL] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
 
+  // 파일 선택(input type="file") 이벤트가 발생했을 때 호출
+  // 선택된 파일을 가져와 setSelectedFile로 UI 업데이트
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
   };
 
+  // uploadBytes() --> 이미지 업로드
   const handleUpload = async () => {
+    // ref(storage, `본인 폴더명`)
     const imageRef = ref(storage, `music-web`);
     await uploadBytes(imageRef, selectedFile);
-
+    // 이미지 URL 추출
     const imageURL = await getDownloadURL(imageRef);
     setDownloadURL(imageURL);
   };
 
-  const handleEdit = () => {
-    // Define your handleEdit logic here
-  };
-
-  // useEffect(() => {
-  //   if (downloadURL !== "") {
-  //     const imageContainer = document.querySelector(".image-container");
-
-  //     // 기존의 내용을 지우고 새로운 이미지를 넣습니다.
-  //     imageContainer.innerHTML = `<img src="${downloadURL}" />`;
-  //   }
-  // }, [downloadURL]);
-
+  // 이미지 화면에 렌더링
   useEffect(() => {
     if (downloadURL !== "") {
       const imageContainer = document.querySelector(".image-container");
 
-      // 기존의 내용을 지우고 새로운 이미지를 넣습니다.
+      // 기존의 내용을 지우고 새로운 이미지를 넣는다.
       imageContainer.innerHTML = `<img src="${downloadURL}" />`;
+
+      // 이미지 크기 조정
+      const img = imageContainer.querySelector("img");
+      img.style.maxWidth = "250px";
+      // 이미지에 스타일 적용
+      img.style.borderRadius = "50%";
+      img.style.margin = "50px 0px 50px 0px";
+      // img.style.display = "flex";
     }
   }, [downloadURL]);
 
+  // Edit 버튼 클릭 시, Modal 창 열림
+  const handleEdit = () => {
+    setModalOpen(true);
+  };
+
+  // Modal - Edit 버튼 클릭 시, 이미지 재업로드
+  const handleImageEdit = () => {
+    if (selectedFile) {
+      handleUpload();
+    }
+  };
+
   return (
-    <div>
+    <Container>
+      <div>
+        <h1>마이페이지</h1>
+        {/* ------ Change Image ------  */}
+        <div className="image-container"></div>
+        <input type="file" onChange={handleFileSelect} />
+        <button onClick={handleUpload}>Upload</button>
+        <button onClick={handleEdit}>Edit</button>
+
+        {/* ------ Modal ------  */}
+        <div>
+          {modalOpen && (
+            <Modal>
+              <input type="file" onChange={handleFileSelect} />
+              <button onClick={handleImageEdit}>Edit</button>
+              <button onClick={() => setModalOpen(false)}>close</button>
+            </Modal>
+          )}
+        </div>
+      </div>
+
+      {/* ------ User Info ------  */}
       <UserInfo>
-        <h2>로그인 정보</h2>
-        <h3>
-          e-mail : {auth.currentUser ? auth.currentUser.email : "No user"}
-        </h3>
+        e-mail : {auth.currentUser ? auth.currentUser.email : "No user"}
       </UserInfo>
-      <h2>내가 작성한 글 보기</h2>
-      <Container>
+
+      {/* ----- My Post List ------  */}
+      <PostContainer>
+        <h2>내가 작성한 게시물</h2>
         {posts
           .filter((post) => {
             const currentUserId = auth.currentUser.uid;
@@ -64,36 +96,36 @@ const Profile = () => {
           .map((post) => (
             <Card key={post.id} post={post} />
           ))}
-      </Container>
-      <div>
-        <h2>Profile</h2>
-        <h3>파일 업로드</h3>
-        <input type="file" onChange={handleFileSelect} />
-        <button onClick={handleUpload}>Upload</button>
-        <button onClick={handleEdit}>수정하기</button>
-        <div style={{ width: "300px" }} className="image-container">
-          <StImage src={downloadURL} alt="Uploaded Image" />
-        </div>
-      </div>
-    </div>
+      </PostContainer>
+    </Container>
   );
 };
 
 export default Profile;
 
-const UserInfo = styled.div`
-  padding: 30px;
-`;
-
 const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 30px;
+  padding: 0px 50px;
 `;
 
-const StImage = styled.img`
-  width: 100%;
-  height: auto;
+const UserInfo = styled.div`
+  margin: 50px 0px 20px 0px;
+`;
+
+const PostContainer = styled.div`
+  gap: 30px;
+  margin-top: 50px;
+`;
+
+const Modal = styled.div`
+  background: white;
+  width: 300px;
+  height: 400px;
+  border-radius: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  position: fixed;
 `;
 
 // #root > main > div > div:nth-child(4) > div > img
