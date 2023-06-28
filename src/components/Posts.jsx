@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
 
 import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
 import { getDataFromFS } from "../services/firestore";
+
+import Card from "./ui/Card";
 
 function Posts() {
   const dispatch = useDispatch();
@@ -22,13 +25,18 @@ function Posts() {
   }, []);
 
   return (
-    <div>
-      <h2>posts list</h2>
-      {posts.map((p) => (
-        <p key={p.id}>{p.title}</p>
+    <Container>
+      {posts.map((post) => (
+        <Card key={post.id} post={post} />
       ))}
-    </div>
+    </Container>
   );
 }
 
 export default Posts;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+`;
