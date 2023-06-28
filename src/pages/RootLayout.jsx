@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom";
 import Nav from "../components/Nav";
+import GlobalStyle from "../global-styles";
 
 const RootLayout = () => {
   return (
     <>
-      <h2>root layout</h2>
+      <GlobalStyle />
       <Nav />
       <main>
         <Outlet />
