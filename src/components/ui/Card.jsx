@@ -14,9 +14,11 @@ const Card = ({ post }) => {
 
   return (
     <Container onMouseOver={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>
-        <Overlay isHovered={isHovered} />
-        <h3>{post.reviewer}</h3>
-        <span>{post.title}</span>
+      <Overlay isHovered={isHovered} />
+      <h3>{post.reviewer}</h3>
+      <p>Title: {post.title}</p>
+      <p>Artist: {post.artist}</p>
+      <p>Review: {post.review}</p>
     </Container>
   );
 };
