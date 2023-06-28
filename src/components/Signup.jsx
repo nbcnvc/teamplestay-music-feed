@@ -39,7 +39,6 @@ const Signup = () => {
     dispatch(authApiAction.actionRequestedSignup());
     await signup(email, pw);
     dispatch(authApiAction.actionSuccessSignup());
-    // alert(`${email}과 ${pw}로 회원가입을 합니다`);
     alert(`회원가입에 성공하셨습니다.`);
   };
 
