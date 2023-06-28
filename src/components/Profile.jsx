@@ -15,14 +15,25 @@ const Profile = () => {
       </UserInfo>
       <h2>내가 작성한 글 보기</h2>
       <Container>
-        {posts
-          .filter((post) => {
-            const currentUserId = auth.currentUser.uid;
-            return post.userId === currentUserId;
-          })
-          .map((post) => (
-            <Card key={post.id} post={post} />
-          ))}
+        {
+          posts
+            .filter((post) => {
+              const currentUserId = auth.currentUser.uid;
+              return post.userId === currentUserId;
+            })
+            .map((post) => {
+              return (
+                <div key={post.id}>
+                  <p>{post.title}</p>
+                  <p>{post.artist}</p>
+                  <p>{post.review}</p>
+                </div>
+              );
+            })
+          // .map((post) => (
+          //   <Card key={post.id} post={post} />
+          // ))
+        }
       </Container>
     </div>
   );

@@ -29,9 +29,9 @@ function Posts() {
     <>
       <NewPost />
       <Container>
-        {posts.map((post) => (
+        {/* {posts.map((post) => (
           <Post post={post} key={post.id} />
-        ))}
+        ))} */}
       </Container>
     </>
   );
