@@ -1,9 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import { authApiSlice } from "./apiSlices";
+import { authApiSlice, postsApiSlice } from "./apiSlices";
 
 const rootReducer = combineReducers({
   authApi: authApiSlice.reducer,
+  postsApi: postsApiSlice.reducer,
 })
 
 export default rootReducer;

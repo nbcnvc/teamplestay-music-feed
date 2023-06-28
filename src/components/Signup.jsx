@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import Button from "./ui/Button";
 import { signup } from "../services/authentication";
-import { authApiAction } from "../redux/slices/apiSlices/authApiSlice/authApiSlice";
+import { authApiAction } from "../redux/slices/apiSlices/authApiSlice"
 
 const StyledLabel = styled.label``;
 const StyledInput = styled.input``;
