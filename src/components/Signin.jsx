@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import Button from "./ui/Button";
-import { authApiAction } from "../redux/slices/apiSlices/authApiSlice/authApiSlice";
+import { authApiAction } from "../redux/slices/apiSlices/authApiSlice";
 import { signin } from "../services/authentication";
 
 const StyledLabel = styled.label``;
