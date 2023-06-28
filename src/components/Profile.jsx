@@ -9,6 +9,10 @@ const Profile = () => {
 
   return (
     <div>
+      <UserInfo>
+        <h2>로그인 정보</h2>
+        <h3>e-mail : {auth.currentUser.email}</h3>
+      </UserInfo>
       <h2>내가 작성한 글 보기</h2>
       <Container>
         {posts
@@ -25,6 +29,10 @@ const Profile = () => {
 };
 
 export default Profile;
+
+const UserInfo = styled.div`
+  padding: 30px;
+`;
 
 const Container = styled.div`
   display: flex;

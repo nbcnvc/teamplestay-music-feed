@@ -6,6 +6,7 @@ import Profile from "./components/Profile";
 import Signin from "./components/Signin";
 import Posts from "./components/Posts";
 import Post from "./components/Post";
+import PostDetail from "./components/PostDetail";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Posts />,
+      },
+      {
+        path: "posts/:id",
+        element: <PostDetail />,
       },
       {
         path: "auth/profile/",

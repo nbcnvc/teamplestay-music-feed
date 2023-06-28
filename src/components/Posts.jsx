@@ -5,8 +5,7 @@ import styled from "styled-components";
 import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
 import { getDataFromFS } from "../services/firestore";
 
-import Card from "./ui/Card";
-import NewPost from "./NewPost";
+import Post from "./Post";
 
 function Posts() {
   const dispatch = useDispatch();
@@ -26,14 +25,11 @@ function Posts() {
   }, []);
 
   return (
-    <div>
-      <NewPost />
-      <Container>
-        {posts.map((post) => (
-          <Card key={post.id} post={post} />
-        ))}
-      </Container>
-    </div>
+    <Container>
+      {posts.map((post) => (
+        <Post post={post} key={post.id} />
+      ))}
+    </Container>
   );
 }
 
