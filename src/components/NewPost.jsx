@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { createData } from "../services/firestore";
+import { auth } from "../services/firebase";
 
 const NewPost = () => {
-  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
+  const [posts, setPosts] = useState("");
 
   const addHandler = async (event) => {
     event.preventDefault();
 
-    const newPost = { title: name };
+    const newPost = { userId: auth.currentUser.uid, title, artist };
     setPosts((prev) => {
       return [...prev, newPost];
     });
-    setName("");
+    setTitle("");
     setArtist("");
 
     createData(newPost);
@@ -22,10 +24,10 @@ const NewPost = () => {
     <form onSubmit={addHandler}>
       <input
         type="text"
-        name="name"
-        value={name}
+        name="title"
+        value={title}
         onChange={(e) => {
-          setName(e.target.value);
+          setTitle(e.target.value);
         }}
       />
       <input
