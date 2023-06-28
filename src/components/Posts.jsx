@@ -18,7 +18,6 @@ function Posts() {
       setPosts(fetchedData);
     };
     fetchData();
-    //ㅇ
   }, []);
 
   const addHandler = async (event) => {
