@@ -1,5 +1,13 @@
+
 import { useState, useEffect } from "react";
-import { createData, getDataFromFS, updateData } from "../services/firestore";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+
+import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
+import { getDataFromFS } from "../services/firestore";
+
+
+import Card from "./ui/Card";
 
 function Posts() {
   const [posts, setPosts] = useState([]);
@@ -15,7 +23,11 @@ function Posts() {
         const item = doc.data();
         return { id: doc.id, ...item };
       });
-      setPosts(fetchedData);
+
+      //setPosts(fetchedData);
+
+      dispatch(postsApiAction.actionUpdateAllPosts(fetchedData));
+
     };
     fetchData();
   }, []);
@@ -66,6 +78,7 @@ function Posts() {
   };
 
   return (
+
     <div>
       <div>
         <h2>Posts List</h2>
@@ -106,7 +119,20 @@ function Posts() {
         <button type="submit">{editingId ? "수정하기" : "등록하기"}</button>
       </form>
     </div>
+
+    <Container>
+      {posts.map((post) => (
+        <Card key={post.id} post={post} />
+      ))}
+    </Container>
+
   );
 }
 
 export default Posts;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+`;
