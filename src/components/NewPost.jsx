@@ -65,7 +65,7 @@ function Posts() {
           type="text"
           name="title"
           value={title}
-          placeholder="제목"
+          placeholder="가수"
           onChange={(e) => {
             setTitle(e.target.value);
           }}
@@ -74,7 +74,7 @@ function Posts() {
           type="text"
           name="artist"
           value={artist}
-          placeholder="가수"
+          placeholder="제목"
           onChange={(e) => {
             setArtist(e.target.value);
           }}
@@ -83,7 +83,7 @@ function Posts() {
           type="text"
           name="review"
           value={review}
-          placeholder="가수"
+          placeholder="리뷰"
           onChange={(e) => {
             setReview(e.target.value);
           }}
