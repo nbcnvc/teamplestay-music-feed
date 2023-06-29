@@ -20,7 +20,7 @@ function Posts() {
       const initialPosts = [];
 
       querySnapshot.forEach((doc) => {
-        initialPosts.push({ id: doc.id, ...doc.data(), like: 0 });
+        initialPosts.push({ id: doc.id, ...doc.data(), like: 0 }); // 좋아요 값을 0으로 초기화한 post 객체 추가
       });
       setPosts(initialPosts);
     };
@@ -40,7 +40,7 @@ function Posts() {
     }
 
     setPosts((prev) => {
-      return [...posts, { ...newPost, id, like: 0 }];
+      return [...posts, { ...newPost, id, like: 0 }]; // 좋아요 값을 0으로 초기화한 post 객체 추가
     });
     setTitle("");
     setArtist("");
@@ -51,7 +51,7 @@ function Posts() {
     setPosts((prev) => {
       return prev.map((post) => {
         if (post.id === postId) {
-          return { ...post, like: post.like + 1 };
+          return { ...post, like: post.like + 1 }; // 클릭한 포스트의 좋아요 값 증가
         }
         return post;
       });
@@ -95,7 +95,7 @@ function Posts() {
         {posts.map((post) => {
           return (
             <StPost post={post} key={post.id}>
-              <p>🤍 {post.like}</p>
+              <p>🤍 {post.like}</p> {/* 좋아요 값 */}
               <br />
               <p>{post.title}</p>
               <p>{post.artist}</p>
