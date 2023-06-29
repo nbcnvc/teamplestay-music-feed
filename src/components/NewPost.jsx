@@ -3,14 +3,16 @@ import { addDoc, collection, getDocs, query } from "firebase/firestore";
 import { db } from "../services/firebase";
 import styled from "styled-components";
 import { auth } from "../services/firebase";
+import Card from "./ui/Card";
 
 function Posts() {
   const [posts, setPosts] = useState([]);
 
-  const [name, setName] = useState("");
   const [artist, setArtist] = useState("");
   const [title, setTitle] = useState("");
   const [review, setReview] = useState("");
+
+  const [like, setLike] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,14 +82,16 @@ function Posts() {
         <button>등록하기</button>
       </StForm>
 
-      <h2>Posts</h2>
       <Container>
         {posts.map((post) => {
           return (
-            <StPost key={post.id}>
+            <StPost post={post} key={post.id}>
+              <p>🤍 {like}</p>
+              <br />
               <p>{post.title}</p>
               <p>{post.artist}</p>
               <p>{post.review}</p>
+              <br />
               <button
                 onClick={() => {
                   const newPosts = posts.filter((item) => {
@@ -97,6 +101,13 @@ function Posts() {
                 }}
               >
                 삭제
+              </button>
+              <button
+                onClick={() => {
+                  setLike(like + 1);
+                }}
+              >
+                좋아요
               </button>
             </StPost>
           );
@@ -114,15 +125,20 @@ const Container = styled.div`
   gap: 30px;
 `;
 
+const StForm = styled.form`
+  margin: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+`;
+
 const StPost = styled.div`
   width: 300px;
   border: 1px solid white;
-  padding: 10px;
-`;
-
-const StForm = styled.form`
-  background-color: orange;
-  margin: 10px;
-  padding: 10px;
-  display: flex;
+  padding: 20px;
 `;

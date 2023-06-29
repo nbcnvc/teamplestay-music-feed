@@ -23,11 +23,11 @@ const Profile = () => {
             })
             .map((post) => {
               return (
-                <div key={post.id}>
+                <Card post={post} key={post.id}>
                   <p>{post.title}</p>
                   <p>{post.artist}</p>
                   <p>{post.review}</p>
-                </div>
+                </Card>
               );
             })
           // .map((post) => (
