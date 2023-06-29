@@ -12,8 +12,6 @@ function Posts() {
   const [title, setTitle] = useState("");
   const [review, setReview] = useState("");
 
-  const [like, setLike] = useState(0);
-
   useEffect(() => {
     const fetchData = async () => {
       const q = query(collection(db, "posts"));
@@ -22,7 +20,7 @@ function Posts() {
       const initialPosts = [];
 
       querySnapshot.forEach((doc) => {
-        initialPosts.push({ id: doc.id, ...doc.data() });
+        initialPosts.push({ id: doc.id, ...doc.data(), like: 0 }); // 좋아요 값을 0으로 초기화한 post 객체 추가
       });
       setPosts(initialPosts);
     };
@@ -42,11 +40,22 @@ function Posts() {
     }
 
     setPosts((prev) => {
-      return [...posts, { ...newPost, id }];
+      return [...posts, { ...newPost, id, like: 0 }]; // 좋아요 값을 0으로 초기화한 post 객체 추가
     });
     setTitle("");
     setArtist("");
     setReview("");
+  };
+
+  const incrementLike = (postId) => {
+    setPosts((prev) => {
+      return prev.map((post) => {
+        if (post.id === postId) {
+          return { ...post, like: post.like + 1 }; // 클릭한 포스트의 좋아요 값 증가
+        }
+        return post;
+      });
+    });
   };
 
   return (
@@ -86,7 +95,7 @@ function Posts() {
         {posts.map((post) => {
           return (
             <StPost post={post} key={post.id}>
-              <p>🤍 {like}</p>
+              <p>🤍 {post.like}</p> {/* 좋아요 값 */}
               <br />
               <p>{post.title}</p>
               <p>{post.artist}</p>
@@ -104,7 +113,7 @@ function Posts() {
               </button>
               <button
                 onClick={() => {
-                  setLike(like + 1);
+                  incrementLike(post.id);
                 }}
               >
                 좋아요
@@ -141,4 +150,5 @@ const StPost = styled.div`
   width: 300px;
   border: 1px solid white;
   padding: 20px;
+  cursor: pointer;
 `;
