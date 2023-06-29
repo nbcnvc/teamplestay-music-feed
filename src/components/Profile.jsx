@@ -32,17 +32,26 @@ const Profile = () => {
   useEffect(() => {
     if (downloadURL !== "") {
       const imageContainer = document.querySelector(".image-container");
+      const imgBox = document.createElement("div"); // 이미지 박스 요소 생성
+      const img = document.createElement("img"); // 이미지 요소 생성
 
-      // 기존의 내용을 지우고 새로운 이미지를 넣는다.
-      imageContainer.innerHTML = `<img src="${downloadURL}" />`;
+      img.src = downloadURL;
+      imgBox.appendChild(img);
+      imageContainer.innerHTML = ""; // 기존의 내용을 지우고
 
-      // 이미지 크기 조정
-      const img = imageContainer.querySelector("img");
-      img.style.maxWidth = "250px";
-      // 이미지에 스타일 적용
-      img.style.borderRadius = "50%";
-      img.style.margin = "50px 0px 50px 0px";
-      // img.style.display = "flex";
+      // 이미지 박스에 스타일 적용
+      imgBox.style.maxWidth = "250px";
+      imgBox.style.maxHeight = "250px";
+      imgBox.style.borderRadius = "50%";
+      imgBox.style.margin = "50px 0px 50px 0px";
+      imgBox.style.overflow = "hidden"; // 이미지가 박스를 벗어나지 않도록 설정
+
+      // 이미지에 스타일 적용하여 꽉 차게 설정
+      img.style.width = "100%";
+      img.style.height = "100%";
+      img.style.objectFit = "cover";
+
+      imageContainer.appendChild(imgBox);
     }
   }, [downloadURL]);
 
@@ -73,7 +82,7 @@ const Profile = () => {
           {modalOpen && (
             <Modal>
               <input type="file" onChange={handleFileSelect} />
-              <button onClick={handleImageEdit}>Edit</button>
+              <button onClick={handleImageEdit}>Image Edit</button>
               <button onClick={() => setModalOpen(false)}>close</button>
             </Modal>
           )}
@@ -103,6 +112,7 @@ const Profile = () => {
 
 export default Profile;
 
+// styled-components
 const Container = styled.div`
   padding: 0px 50px;
 `;
