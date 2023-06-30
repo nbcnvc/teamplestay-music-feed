@@ -140,7 +140,7 @@ const Container = styled.div`
   flex-wrap: wrap;
   gap: 20px;
 `;
-const StForm = styled.form`
+const StForm = styled.div`
   margin: 20px auto;
   padding: 10px;
   display: flex;
@@ -165,7 +165,7 @@ const StButtonLayout = styled.div`
   justify-content: center;
 `;
 
-const StInput = styled.div`
+const StInput = styled.input`
   color: white;
   margin: 20px 5px;
   height: 30px;
