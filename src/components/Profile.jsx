@@ -90,6 +90,7 @@ const Profile = () => {
       <ProfileContainer>
         <StBigText>MY PAGE</StBigText>
         <StText>PROFILE</StText>
+
         <ProfileBox>
           {/* ------ Change Image ------  */}
           <div className="image-container"></div>
@@ -156,6 +157,7 @@ const Profile = () => {
   );
 };
 export default Profile;
+
 // styled-components
 const Container = styled.div`
   text-align: center;
@@ -171,8 +173,10 @@ const ProfileBox = styled.div`
   margin-top: 20px;
   margin-bottom: 60px;
   border-radius: 10px;
+
   align-items: center;
   justify-content: center;
+  width: 250px;
 `;
 const UserInfo = styled.div`
   margin: 50px 0px 20px 0px;
@@ -209,6 +213,7 @@ const PostContainer = styled.div`
 `;
 const PostBox = styled.div`
   display: flex;
+
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
