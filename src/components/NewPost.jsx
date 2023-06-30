@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { auth } from "../services/firebase";
 import Card from "./ui/Card";
 
+import Button from "./ui/Button";
+
 function Posts() {
   const [posts, setPosts] = useState([]);
 
@@ -69,7 +71,7 @@ function Posts() {
   return (
     <div>
       <StForm onSubmit={addPost}>
-        <input
+        <StInput
           type="text"
           name="title"
           value={title}
@@ -78,7 +80,7 @@ function Posts() {
             setTitle(e.target.value);
           }}
         />
-        <input
+        <StInput
           type="text"
           name="artist"
           value={artist}
@@ -87,7 +89,7 @@ function Posts() {
             setArtist(e.target.value);
           }}
         />
-        <input
+        <StInput
           type="text"
           name="review"
           value={review}
@@ -96,7 +98,7 @@ function Posts() {
             setReview(e.target.value);
           }}
         />
-        <button>등록하기</button>
+        <Button>등록하기</Button>
       </StForm>
     </div>
   );
@@ -111,14 +113,28 @@ const Container = styled.div`
 `;
 
 const StForm = styled.form`
-  margin: 20px;
+  margin: 20px auto;
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
-  position: fixed;
-  bottom: 0;
+  /* position: fixed; */
+  width: 100%;
   max-width: 1200px;
   min-width: 800px;
+`;
+
+const StInput = styled.div`
+  color: white;
+  margin: 20px 5px;
+  height: 30px;
+  border: 1px solid white;
+  background-color: transparent;
+  width: 220px;
+
+  .placeholder {
+    color: white;
+    background-color: orange;
+  }
 `;
