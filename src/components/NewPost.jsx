@@ -6,6 +6,7 @@ import { auth } from "../services/firebase";
 import Card from "./ui/Card";
 
 import Button from "./ui/Button";
+import { findAllInRenderedTree } from "react-dom/test-utils";
 
 function Posts() {
   const [posts, setPosts] = useState([]);
@@ -98,7 +99,7 @@ function Posts() {
             setReview(e.target.value);
           }}
         />
-        <Button>등록하기</Button>
+        <Button onClick={() => alert("등록되었습니다")}>등록하기</Button>
       </StForm>
     </div>
   );
@@ -125,7 +126,7 @@ const StForm = styled.form`
   min-width: 800px;
 `;
 
-const StInput = styled.div`
+const StInput = styled.input`
   color: white;
   margin: 20px 5px;
   height: 30px;
