@@ -91,37 +91,6 @@ function Posts() {
         <button>등록하기</button>
       </StForm>
 
-      <Container>
-        {posts.map((post) => {
-          return (
-            <StPost post={post} key={post.id}>
-              <p>🤍 {post.like}</p> {/* 좋아요 값 */}
-              <br />
-              <p>{post.title}</p>
-              <p>{post.artist}</p>
-              <p>{post.review}</p>
-              <br />
-              <button
-                onClick={() => {
-                  const newPosts = posts.filter((item) => {
-                    return item.id !== post.id;
-                  });
-                  setPosts(newPosts);
-                }}
-              >
-                삭제
-              </button>
-              <button
-                onClick={() => {
-                  incrementLike(post.id);
-                }}
-              >
-                좋아요
-              </button>
-            </StPost>
-          );
-        })}
-      </Container>
     </div>
   );
 }
@@ -146,9 +115,3 @@ const StForm = styled.form`
   width: 100%;
 `;
 
-const StPost = styled.div`
-  width: 300px;
-  border: 1px solid white;
-  padding: 20px;
-  cursor: pointer;
-`;
