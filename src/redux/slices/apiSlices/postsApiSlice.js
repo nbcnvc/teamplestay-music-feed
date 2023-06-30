@@ -34,7 +34,7 @@ const postsApiSlice = createSlice({
       state.posts = state.posts.filter(p => p.id !== postId)
     },
     actionIncrementLike(state, action) {
-      const { postId } = action.payload;
+      const postId = action.payload;
       const post = state.posts.find((post) => post.id === postId);
       if (post) {
         post.like += 1;

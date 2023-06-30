@@ -11,8 +11,6 @@ import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
 function Posts() {
   const dispatch = useDispatch();
 
-  const [posts, setPosts] = useState([]);
-
   const [artist, setArtist] = useState("");
   const [title, setTitle] = useState("");
   const [review, setReview] = useState("");
@@ -27,7 +25,6 @@ function Posts() {
       querySnapshot.forEach((doc) => {
         initialPosts.push({ id: doc.id, ...doc.data(), like: 0 }); // 좋아요 값을 0으로 초기화한 post 객체 추가
       });
-      setPosts(initialPosts);
     };
     fetchData();
   }, []);
@@ -41,7 +38,7 @@ function Posts() {
       return;
     }
 
-    const newPost = { userId: auth.currentUser.uid, title, artist, review };
+    const newPost = { userId: auth.currentUser.uid, title, artist, review, like: 0 };
 
     const collectionRef = collection(db, "posts");
     const { id } = await addDoc(collectionRef, newPost);
@@ -51,26 +48,12 @@ function Posts() {
       return false;
     }
 
-    const updatedPost = { ...newPost, id, like: 0 }; // 좋아요 값을 0으로 초기화한 post 객체
-
     // 업데이트된 데이터를 현재 상태의 posts에 추가하여 업데이트
-    setPosts((prev) => [...prev, updatedPost]);
     dispatch(postsApiAction.actionAddPost(newPost));
 
     setTitle("");
     setArtist("");
     setReview("");
-  };
-
-  const incrementLike = (postId) => {
-    setPosts((prev) => {
-      return prev.map((post) => {
-        if (post.id === postId) {
-          return { ...post, like: post.like + 1 }; // 클릭한 포스트의 좋아요 값 증가
-        }
-        return post;
-      });
-    });
   };
 
   return (

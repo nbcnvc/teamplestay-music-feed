@@ -27,7 +27,7 @@ function Posts() {
   }, []);
 
   const incrementLike = (postId) => {
-    dispatch(postsApiAction.actionIncrementLike({ postId }));
+    dispatch(postsApiAction.actionIncrementLike(postId));
   };
 
   const deletePost = (postId) => {
