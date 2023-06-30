@@ -6,7 +6,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background: #1d1a50;
+  margin: 0;
+  padding: 0;
+  /* 그라데이션 설정 */
+  background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* 추가: 화면 전체 높이로 설정 */
+  min-height: 100vh;
   color: #fff;
 }
 
