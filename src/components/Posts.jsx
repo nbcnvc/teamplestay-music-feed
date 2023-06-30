@@ -56,7 +56,6 @@ function Posts() {
         allow="autoplay; encrypted-media"
         allowfullscreen
       ></iframe>
-      <NewPost />
       <Container>
         <NewPost />
         <PostContainer>
