@@ -7,6 +7,7 @@ import { auth } from "../services/firebase";
 import Button from "./ui/Button";
 import { useDispatch } from "react-redux";
 import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
+import { createData } from "../services/firestore";
 
 function Posts() {
   const dispatch = useDispatch();
@@ -39,9 +40,8 @@ function Posts() {
     }
 
     const newPost = { userId: auth.currentUser.uid, title, artist, review, like: 0 };
-
-    const collectionRef = collection(db, "posts");
-    const { id } = await addDoc(collectionRef, newPost);
+    const docRef = await createData(newPost);
+    newPost.id = docRef.id;
 
     if (!title || !artist || !review) {
       alert("필수 값이 누락되었습니다.");
