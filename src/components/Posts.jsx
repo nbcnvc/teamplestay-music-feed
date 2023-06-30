@@ -35,8 +35,6 @@ function Posts() {
     dispatch(postsApiAction.actionDeletePost(postId));
   };
 
-  console.log('===>', posts)
-
   return (
     <>
       <h2
