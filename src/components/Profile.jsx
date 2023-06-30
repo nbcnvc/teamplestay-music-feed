@@ -164,7 +164,9 @@ const Container = styled.div`
   margin-top: 30px;
 `;
 const ProfileContainer = styled.div`
+  display: grid;
   align-items: center;
+  text-align: center;
   justify-content: center;
 `;
 const ProfileBox = styled.div`
