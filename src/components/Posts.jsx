@@ -7,12 +7,10 @@ import Button from "./ui/Button";
 import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
 import { getDataFromFS } from "../services/firestore";
 
-import Post from "./Post";
 import NewPost from "./NewPost";
 
 function Posts() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const posts = useSelector((state) => state.postsApi.posts);
 
@@ -40,42 +38,44 @@ function Posts() {
 
   return (
     <>
-      <iframe
-        style={{
-          // position: "fixed",
-          // zIndex: "-99",
-          width: "100%",
-          height: "650px",
-          // backgroundSize: "cover",
-          marginTop: "0",
-          marginBottom: "auto",
-          opacity: "0.5",
-          pointerEvents: "none",
-          marginBottom: "50px",
-        }}
-        frameborder="0"
-        src="https://www.youtube.com/embed/6ZUIwj3FgUY?mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
-      ></iframe>
-      <NewPost />
       <Container>
-        {posts.map((post) => (
-          <StPost key={post.id}>
-            <p>🤍 {post.like}</p>
-            <br />
-            <Link to={`posts/${post.id}`} state={{ post: post }}>
-              <p style={{ color: "white" }}>{post.title}</p>
-              <p style={{ color: "white" }}>{post.artist}</p>
-              <p style={{ color: "white" }}>{post.review}</p>
-            </Link>
-            <br />
-            <StButtonLayout>
-              <Button onClick={() => deletePost(post.id)}>삭제</Button>
-              <Button onClick={() => incrementLike(post.id)}>좋아요</Button>
-            </StButtonLayout>
-          </StPost>
-        ))}
+        <iframe
+          style={{
+            // position: "fixed",
+            // zIndex: "-99",
+            width: "100%",
+            height: "650px",
+            // backgroundSize: "cover",
+            marginTop: "0",
+            marginBottom: "auto",
+            opacity: "0.5",
+            pointerEvents: "none",
+            marginBottom: "50px",
+          }}
+          frameborder="0"
+          src="https://www.youtube.com/embed/6ZUIwj3FgUY?mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+        ></iframe>
+        <NewPost />
+        <PostContainer>
+          {posts.map((post) => (
+            <StPost key={post.id}>
+              <p>🤍 {post.like}</p>
+              <br />
+              <Link to={`posts/${post.id}`} state={{ post: post }}>
+                <p style={{ color: "white" }}>{post.title}</p>
+                <p style={{ color: "white" }}>{post.artist}</p>
+                <p style={{ color: "white" }}>{post.review}</p>
+              </Link>
+              <br />
+              <StButtonLayout>
+                <Button onClick={() => deletePost(post.id)}>삭제</Button>
+                <Button onClick={() => incrementLike(post.id)}>좋아요</Button>
+              </StButtonLayout>
+            </StPost>
+          ))}
+        </PostContainer>
       </Container>
     </>
   );
@@ -83,11 +83,11 @@ function Posts() {
 
 export default Posts;
 
-// const Container = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   gap: 30px;
-// `;
+const Container = styled.div`
+  diaplay: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const StPost = styled.div`
   width: 300px;
@@ -97,7 +97,7 @@ const StPost = styled.div`
   flex-wrap: wrap;
 `;
 
-const Container = styled.div`
+const PostContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
