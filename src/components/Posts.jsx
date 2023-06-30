@@ -65,9 +65,9 @@ function Posts() {
             <p>🤍 {post.like}</p>
             <br />
             <Link to={`posts/${post.id}`} state={{ post: post }}>
-              <p>{post.title}</p>
-              <p>{post.artist}</p>
-              <p>{post.review}</p>
+              <p style={{ color: "white" }}>{post.title}</p>
+              <p style={{ color: "white" }}>{post.artist}</p>
+              <p style={{ color: "white" }}>{post.review}</p>
             </Link>
             <br />
             <StButtonLayout>
