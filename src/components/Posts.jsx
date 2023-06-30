@@ -88,9 +88,12 @@ export default Posts;
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
+
+  margin: 0 auto;
+  max-width: 1200px;
 `;
 
 const StPost = styled.div`
