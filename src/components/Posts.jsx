@@ -103,5 +103,7 @@ const StPost = styled.div`
 `;
 
 const StButtonLayout = styled.div`
-  display: flex;
+  // display: flex;
+  // justify-contents: center,
+  // align-items: center,
 `;
