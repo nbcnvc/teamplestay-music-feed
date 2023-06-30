@@ -29,6 +29,13 @@ function Posts() {
 
   const addPost = async (event) => {
     event.preventDefault();
+
+    // 현재 사용자가 로그인되어 있는지 확인
+    if (!auth.currentUser) {
+      // 로그인되어 있지 않은 경우, 필요한 처리를 여기에 추가
+      return;
+    }
+
     const newPost = { userId: auth.currentUser.uid, title, artist, review };
 
     const collectionRef = collection(db, "posts");
@@ -39,9 +46,18 @@ function Posts() {
       return false;
     }
 
-    setPosts((prev) => {
-      return [...posts, { ...newPost, id, like: 0 }]; // 좋아요 값을 0으로 초기화한 post 객체 추가
-    });
+    const updatedPost = { ...newPost, id, like: 0 }; // 좋아요 값을 0으로 초기화한 post 객체
+
+    // Firestore에서 데이터를 다시 가져와서 상태를 업데이트
+    const querySnapshot = await getDocs(query(collection(db, "posts")));
+    const updatedPosts = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+      like: 0,
+    }));
+
+    setPosts(updatedPosts);
+
     setTitle("");
     setArtist("");
     setReview("");
@@ -90,7 +106,6 @@ function Posts() {
         />
         <button>등록하기</button>
       </StForm>
-
     </div>
   );
 }
@@ -112,6 +127,6 @@ const StForm = styled.form`
   gap: 5px;
   position: fixed;
   bottom: 0;
-  width: 100%;
+  max-width: 1200px;
+  min-width: 800px;
 `;
-

@@ -19,11 +19,18 @@ const postsApiSlice = createSlice({
       const newPost = action.payload;
       state.posts = state.posts.map((post) => {
         if (post.id === newPost.id) {
-          updateData(newPost.id, newPost)
+          updateData(newPost.id, newPost);
           return newPost;
         }
         return post;
       });
+    },
+    actionIncrementLike(state, action) {
+      const { postId } = action.payload;
+      const post = state.posts.find((post) => post.id === postId);
+      if (post) {
+        post.like += 1;
+      }
     },
   },
 });
