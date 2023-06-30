@@ -10,13 +10,13 @@ const Nav = () => {
       <Link to="/">Teamplestay</Link>
       {isAuthenticated ? (
         <div>
-          <Link to="auth/profile">profile </Link>
-          <Link to="auth/signout">signout</Link>
+          <Link to="auth/profile">🧑🏻‍👩🏻‍👧🏻profile </Link>
+          <Link to="auth/signout">🔓signout</Link>
         </div>
       ) : (
         <div>
-          <Link to="auth/signup">signup</Link>
-          <Link to="auth/signin">signin</Link>
+          <Link to="auth/signup">🎉signup</Link>
+          <Link to="auth/signin">🔒signin</Link>
         </div>
       )}
     </Container>
