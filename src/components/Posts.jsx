@@ -102,6 +102,9 @@ const PostContainer = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
+
+  margin: 0 auto;
+  max-width: 1200px;
 `;
 
 const StButtonLayout = styled.div`
