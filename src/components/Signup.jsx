@@ -73,6 +73,8 @@ const StyledInput = styled.input`
   padding: 5px;
   border-bottom: 1px solid white;
   border-right: none;
+  border-top: none;
+  border-left: none;
   background-color: transparent;
   width: 400px;
   margin-bottom: 20px;

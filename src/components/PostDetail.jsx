@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { styled } from "styled-components";
+import Button from "./ui/Button";
 
 import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
 
@@ -31,52 +32,58 @@ const PostDetail = () => {
 
   const handleSave = () => {
     setIsEditing(false);
-    dispatch(postsApiAction.actionEditPost(editedPost)) 
+    dispatch(postsApiAction.actionEditPost(editedPost));
   };
 
   return (
     <Container>
       <h1>⭐오늘의 pick⭐</h1>
       {isEditing ? (
-        <form>
-          <label>
-            Title:
-            <input
-              type="text"
-              value={editedPost.title}
-              onChange={handleTitleChange}
-            />
-          </label>
-          <br />
-          <label>
-            Artist:
-            <input
-              type="text"
-              value={editedPost.artist}
-              onChange={handleArtistChange}
-            />
-          </label>
-          <br />
-          <label>
-            Review:
-            <textarea
-              value={editedPost.review}
-              onChange={handleReviewChange}
-            ></textarea>
-          </label>
-          <br />
-          <button type="button" onClick={handleSave}>
-            Save
-          </button>
-        </form>
+        <StForm>
+          <StBox>
+            <label>
+              Title:
+              <StInput
+                type="text"
+                value={editedPost.title}
+                onChange={handleTitleChange}
+              />
+            </label>
+            <br />
+            <label>
+              Artist:
+              <StInput
+                type="text"
+                value={editedPost.artist}
+                onChange={handleArtistChange}
+              />
+            </label>
+            <br />
+            <label>
+              Review:
+              <StInput
+                value={editedPost.review}
+                onChange={handleReviewChange}
+              ></StInput>
+            </label>
+            <br />
+            <Button type="button" onClick={handleSave}>
+              Save
+            </Button>
+          </StBox>
+        </StForm>
       ) : (
         <>
-          <p>Title: {editedPost.title}</p>
-          <p>Artist: {editedPost.artist}</p>
-          <p>Review: {editedPost.review}</p>
-          <button type="button" onClick={handleEdit}>
-            Edit
-          </button>
+          <StContainer>
+            <StBox>
+              <p>Title: {editedPost.title}</p>
+              <p>Artist: {editedPost.artist}</p>
+              <p>Review: {editedPost.review}</p>
+              <Button type="button" onClick={handleEdit}>
+                수정하기
+              </Button>
+            </StBox>
+          </StContainer>
         </>
       )}
     </Container>
@@ -86,5 +93,33 @@ const PostDetail = () => {
 export default PostDetail;
 
 const Container = styled.nav`
-  display: flex;
+  display: grid;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+`;
+
+const StBox = styled.div`
+  border: 1px solid white;
+  padding: 40px;
+  margin-top: 20px;
+  border-radius: 10px;
+
+  /* align-items: center;
+  justify-content: center; */
+  width: 250px;
+`;
+
+const StContainer = styled.div`
+  /* padding-top: 50ps; */
+`;
+
+const StInput = styled.input`
+  padding: 10px;
+  margin: 10px;
+`;
+
+const StForm = styled.form`
+  display: grid;
+  place-content: left;
 `;

@@ -39,7 +39,13 @@ function Posts() {
       return;
     }
 
-    const newPost = { userId: auth.currentUser.uid, title, artist, review, like: 0 };
+    const newPost = {
+      userId: auth.currentUser.uid,
+      title,
+      artist,
+      review,
+      like: 0,
+    };
     const docRef = await createData(newPost);
     newPost.id = docRef.id;
 
@@ -93,12 +99,6 @@ function Posts() {
 }
 
 export default Posts;
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-`;
 
 const StForm = styled.form`
   margin: 20px auto;

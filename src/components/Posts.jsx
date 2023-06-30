@@ -35,7 +35,7 @@ function Posts() {
     dispatch(postsApiAction.actionDeletePost(postId));
   };
 
-  console.log('===>', posts)
+  console.log("===>", posts);
 
   return (
     <>
@@ -94,4 +94,6 @@ const StPost = styled.div`
   text-align: center;
 `;
 
-const StButtonLayout = styled.div``;
+const StButtonLayout = styled.div`
+  padding-top: 50ps;
+`;
