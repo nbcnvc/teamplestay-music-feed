@@ -48,21 +48,13 @@ function Posts() {
 
     const updatedPost = { ...newPost, id, like: 0 }; // 좋아요 값을 0으로 초기화한 post 객체
 
-    // Firestore에서 데이터를 다시 가져와서 상태를 업데이트
-    const querySnapshot = await getDocs(query(collection(db, "posts")));
-    const updatedPosts = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-      like: 0,
-    }));
-
-    setPosts(updatedPosts);
+    // 업데이트된 데이터를 현재 상태의 posts에 추가하여 업데이트
+    setPosts((prev) => [...prev, updatedPost]);
 
     setTitle("");
     setArtist("");
     setReview("");
   };
-
   const incrementLike = (postId) => {
     setPosts((prev) => {
       return prev.map((post) => {
