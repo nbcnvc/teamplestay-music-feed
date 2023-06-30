@@ -1,10 +1,9 @@
-import Card from "./ui/Card";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { auth } from "../services/firebase";
-import NewPost from "./NewPost";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import React, { useState, useEffect } from "react";
+
+import { auth } from "../services/firebase";
 import { storage } from "../services/firebase";
 import Button from "./ui/Button";
 
@@ -44,23 +43,6 @@ const Profile = () => {
     alert("업로드되었습니다!");
   };
 
-  // uploadBytes() --> 이미지 업로드
-  // const handleUpload = async () => {
-  // ref(storage, `본인 폴더명`)
-  // const imageRef = ref(storage, `music-web`);
-  // await uploadBytes(imageRef, selectedFile);
-  // 이미지 URL 추출
-  //   const imageURL = await getDownloadURL(imageRef);
-  //   setDownloadURL(imageURL);
-  // };
-
-  // 이미지 화면에 렌더링
-  // useEffect(() => {
-  //   if (downloadURL !== "") {
-  //     const imageContainer = document.querySelector(".image-container");
-  //     const imgBox = document.createElement("div"); // 이미지 박스 요소 생성
-  //     const img = document.createElement("img"); // 이미지 요소 생성
-
   // 이미지 화면에 렌더링
   useEffect(() => {
     const imageContainer = document.querySelector(".image-container");
@@ -98,120 +80,7 @@ const Profile = () => {
       defaultImg.style.overflow = "hidden";
       imageContainer.appendChild(defaultImg);
     }
-    // const fileButton = document.createElement("button");
-    // fileButton.style.height = "35px";
-    // // width: 250px;
-    // // height: 35px;
-    // // border-width: 0px;
-    // // border-radius: 8px;
-    // // margin-top: 10px;
   }, [downloadURL]);
-
-  // 이미지에 스타일 적용하여 꽉 차게 설정
-  //     img.style.width = "100%";
-  //     img.style.height = "100%";
-  //     img.style.objectFit = "cover";
-
-  //     imageContainer.appendChild(imgBox);
-  //   }
-  // }, [downloadURL]);
-
-  // Edit 버튼 클릭 시, Modal 창 열림
-  // const handleEdit = () => {
-  //   setModalOpen(true);
-  // };
-
-  // Modal - Edit 버튼 클릭 시, 이미지 재업로드
-  // const handleImageEdit = () => {
-  //   if (selectedFile) {
-  //     handleUpload();
-  //   }
-  // };
-
-  //   return (
-  //     <Container>
-  //       <div>
-  //         <h1>마이페이지</h1>
-  //         {/* ------ Change Image ------  */}
-  //         <div className="image-container"></div>
-  //         <input type="file" onChange={handleFileSelect} />
-  //         <button onClick={handleUpload}>Upload</button>
-  //         <button onClick={handleEdit}>Edit</button>
-
-  //         {/* ------ Modal ------  */}
-  //         <div>
-  //           {modalOpen && (
-  //             <Modal>
-  //               <input type="file" onChange={handleFileSelect} />
-  //               <button onClick={handleImageEdit}>Image Edit</button>
-  //               <button onClick={() => setModalOpen(false)}>close</button>
-  //             </Modal>
-  //           )}
-  //         </div>
-  //       </div>
-
-  //       {/* ------ User Info ------  */}
-  //       <UserInfo>
-  //         <h2>로그인 정보</h2>
-  //         <h3>e-mail : {auth.currentUser.email}</h3>
-  //       </UserInfo>
-  //       <h2>내가 작성한 글 보기</h2>
-
-  //       {/* ----- My Post List ------  */}
-  //       <PostContainer>
-  //         {
-  //           posts
-  //             .filter((post) => {
-  //               const currentUserId = auth.currentUser.uid;
-  //               return post.userId === currentUserId;
-  //             })
-  //             .map((post) => {
-  //               return (
-  //                 <Card post={post} key={post.id}>
-  //                   <p>{post.title}</p>
-  //                   <p>{post.artist}</p>
-  //                   <p>{post.review}</p>
-  //                 </Card>
-  //               );
-  //             })
-  //           // .map((post) => (
-  //           //   <Card key={post.id} post={post} />
-  //           // ))
-  //         }
-  //       </PostContainer>
-  //     </Container>
-  //   );
-  // };
-
-  // export default Profile;
-
-  // // styled-components
-  // const Container = styled.div`
-  //   align-items: center;
-  //   justify-content: center;
-  //   padding: 0px 50px;
-  // `;
-
-  // const UserInfo = styled.div`
-  //   margin: 50px 0px 20px 0px;
-  // `;
-
-  // const PostContainer = styled.div`
-  //   gap: 30px;
-  //   margin-top: 50px;
-  // `;
-
-  // const Modal = styled.div`
-  //   background: white;
-  //   width: 300px;
-  //   height: 400px;
-  //   border-radius: 10px;
-  //   top: 50%;
-  //   left: 50%;
-  //   transform: translate(-50%, -50%);
-  //   padding: 20px;
-  //   position: fixed;
-  // `;
 
   return (
     <Container>
@@ -241,7 +110,9 @@ const Profile = () => {
         </ProfileBox>
       </ProfileContainer>
       {/* ----- My Post List ------  */}
-      <StText style={{ marginBottom: "30px" }}>POST</StText>
+      <StText style={{ marginBottom: "30px", textAlign: "center" }}>
+        내가 쓴 글 모아보기
+      </StText>
       <PostContainer>
         <PostBox>
           {posts
@@ -292,7 +163,9 @@ const Container = styled.div`
 `;
 
 const ProfileContainer = styled.div`
+  display: grid;
   align-items: center;
+  text-align: center;
   justify-content: center;
 `;
 const ProfileBox = styled.div`

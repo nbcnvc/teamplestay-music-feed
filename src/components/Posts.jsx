@@ -102,6 +102,4 @@ const StPost = styled.div`
   text-align: center;
 `;
 
-const StButtonLayout = styled.div`
-  display: flex;
-`;
+const StButtonLayout = styled.div``;
