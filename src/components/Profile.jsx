@@ -1,10 +1,9 @@
-import Card from "./ui/Card";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { auth } from "../services/firebase";
-// import NewPost from "./NewPost";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import React, { useState, useEffect } from "react";
+
+import { auth } from "../services/firebase";
 import { storage } from "../services/firebase";
 
 const Profile = () => {

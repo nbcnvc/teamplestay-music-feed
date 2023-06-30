@@ -103,5 +103,4 @@ const StPost = styled.div`
 `;
 
 const StButtonLayout = styled.div`
-  // display: flex;
 `;
