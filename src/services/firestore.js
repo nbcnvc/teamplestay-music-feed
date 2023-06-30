@@ -4,6 +4,7 @@ import {
   getDocs,
   doc,
   updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -22,4 +23,9 @@ export const createData = (post) => {
 export const updateData = async (postId, updatedData) => {
   const postRef = doc(COLLECTION, postId);
   await updateDoc(postRef, updatedData);
+};
+
+export const deleteData = async (postId) => {
+  const postRef = doc(COLLECTION, postId);
+  await deleteDoc(postRef);
 };

@@ -21,6 +21,8 @@ const StyledInput = styled.input`
   padding: 5px;
   border-bottom: 1px solid white;
   border-right: none;
+  border-left: none;
+  border-top: none;
   background-color: transparent;
   width: 400px;
   margin-bottom: 20px;

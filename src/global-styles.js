@@ -20,19 +20,11 @@ const GlobalStyle = createGlobalStyle`
 		font-size: 100%;
 		font: inherit;
 		vertical-align: baseline;
-		display: grid;
-/* align-items: center;
-justify-content: center; */
 	}
 	/* HTML5 display-role reset for older browsers */
 	article, aside, details, figcaption, figure, 
 	footer, header, hgroup, menu, nav, section {
 		display: block;
-	}
-	body {
-		line-height: 1;
-		max-width: 1200px;
-		min-width: 800px;
 	}
 	ol, ul {
 		list-style: none;

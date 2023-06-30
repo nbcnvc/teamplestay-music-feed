@@ -3,12 +3,19 @@ import { addDoc, collection, getDocs, query } from "firebase/firestore";
 import { db } from "../services/firebase";
 import styled from "styled-components";
 import { auth } from "../services/firebase";
+<<<<<<< HEAD
 import Card from "./ui/Card";
 import { Link } from "react-router-dom";
+=======
+>>>>>>> main
 
 import Button from "./ui/Button";
+import { useDispatch } from "react-redux";
+import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
 
 function Posts() {
+  const dispatch = useDispatch();
+
   const [posts, setPosts] = useState([]);
   const [artist, setArtist] = useState("");
   const [title, setTitle] = useState("");
@@ -34,13 +41,24 @@ function Posts() {
       alert("필수 값이 누락되었습니다.");
       return false;
     }
+<<<<<<< HEAD
     setPosts((prev) => {
       return [...posts, { ...newPost, id, like: 0 }]; // 좋아요 값을 0으로 초기화한 post 객체 추가
     });
+=======
+
+    const updatedPost = { ...newPost, id, like: 0 }; // 좋아요 값을 0으로 초기화한 post 객체
+
+    // 업데이트된 데이터를 현재 상태의 posts에 추가하여 업데이트
+    setPosts((prev) => [...prev, updatedPost]);
+    dispatch(postsApiAction.actionAddPost(newPost));
+
+>>>>>>> main
     setTitle("");
     setArtist("");
     setReview("");
   };
+
   const incrementLike = (postId) => {
     setPosts((prev) => {
       return prev.map((post) => {
@@ -81,7 +99,7 @@ function Posts() {
             setReview(e.target.value);
           }}
         />
-        <Button>등록하기</Button>
+        <Button onClick={() => alert("등록되었습니다")}>등록하기</Button>
       </StForm>
       <Container>
         {posts.map((post) => {
@@ -153,6 +171,7 @@ const StForm = styled.div`
   min-width: 800px;
 `;
 
+<<<<<<< HEAD
 const StPost = styled.div`
   width: 300px;
   border: 1px solid white;
@@ -165,6 +184,8 @@ const StButtonLayout = styled.div`
   justify-content: center;
 `;
 
+=======
+>>>>>>> main
 const StInput = styled.input`
   color: white;
   margin: 20px 5px;

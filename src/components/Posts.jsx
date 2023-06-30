@@ -5,14 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "./ui/Button";
 
 import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
-import { getDataFromFS } from "../services/firestore";
+import { deleteData, getDataFromFS } from "../services/firestore";
 
-import Post from "./Post";
 import NewPost from "./NewPost";
 
 function Posts() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const posts = useSelector((state) => state.postsApi.posts);
 
@@ -33,41 +31,46 @@ function Posts() {
   };
 
   const deletePost = (postId) => {
-    // 삭제 로직 구현
-    const newPosts = posts.filter((post) => post.id !== postId);
-    dispatch(postsApiAction.actionUpdateAllPosts(newPosts));
+    deleteData(postId);
+    dispatch(postsApiAction.actionDeletePost(postId));
   };
 
   return (
     <>
       <iframe
         style={{
-          // position: "fixed",
-          // zIndex: "-99",
           width: "100%",
           height: "650px",
-          // backgroundSize: "cover",
-          marginTop: "0",
-          marginBottom: "auto",
-          opacity: "0.5",
+          opacity: "1",
           pointerEvents: "none",
           marginBottom: "50px",
         }}
         frameborder="0"
-        src="https://www.youtube.com/embed/6ZUIwj3FgUY?mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=0"
+        src="https://www.youtube.com/embed/ewxYV67Gtn4?mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=0"
         allow="autoplay; encrypted-media"
         allowfullscreen
       ></iframe>
+      <h2
+        style={{
+          color: "white",
+          fontSize: "20px",
+          textAlign: "center",
+        }}
+      >
+        💛오늘의 추천 음악을 알려주세요💛
+      </h2>
       <NewPost />
+
       <Container>
         {posts.map((post) => (
           <StPost key={post.id}>
             <p>🤍 {post.like}</p>
             <br />
             <Link to={`posts/${post.id}`} state={{ post: post }}>
-              <p>{post.title}</p>
-              <p>{post.artist}</p>
-              <p>{post.review}</p>
+              <p style={{ color: "white" }}>
+                {post.title} - {post.artist}
+              </p>
+              <p style={{ color: "white" }}>{post.review}</p>
             </Link>
             <br />
             <StButtonLayout>
@@ -83,20 +86,6 @@ function Posts() {
 
 export default Posts;
 
-// const Container = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   gap: 30px;
-// `;
-
-const StPost = styled.div`
-  width: 300px;
-  border: 1px solid white;
-  padding: 20px;
-  cursor: pointer;
-  flex-wrap: wrap;
-`;
-
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -104,7 +93,15 @@ const Container = styled.div`
   gap: 20px;
 `;
 
+const StPost = styled.div`
+  width: 300px;
+  border: 1px solid white;
+  padding: 20px;
+  cursor: pointer;
+  flex-wrap: wrap;
+  text-align: center;
+`;
+
 const StButtonLayout = styled.div`
   display: flex;
-  justify-content: center;
 `;
