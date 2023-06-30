@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "./ui/Button";
 
 import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
-import { deleteData, getDataFromFS } from "../services/firestore";
+import { deleteData, getData, getDataFromFS, updateLike } from "../services/firestore";
 
 import NewPost from "./NewPost";
 
@@ -26,7 +26,8 @@ function Posts() {
     fetchData();
   }, []);
 
-  const incrementLike = (postId) => {
+  const incrementLike = async (postId) => {
+    updateLike(postId)
     dispatch(postsApiAction.actionIncrementLike(postId));
   };
 

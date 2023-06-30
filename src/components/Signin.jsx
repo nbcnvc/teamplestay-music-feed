@@ -59,9 +59,12 @@ const Signin = () => {
     dispatch(authApiAction.actionRequestedLogin());
 
     try {
-      await signin(email, pw);
+      const res = await signin(email, pw);
+      const accessToken = res.user.accessToken
+
       dispatch(authApiAction.actionSuccessLogin());
       alert(`로그인에 성공하셨습니다.`);
+      localStorage.setItem('accessToken', accessToken)
       navigate('/')
     } catch (error) {
       console.log(error);
