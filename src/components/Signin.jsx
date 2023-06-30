@@ -6,8 +6,24 @@ import Button from "./ui/Button";
 import { authApiAction } from "../redux/slices/apiSlices/authApiSlice";
 import { signin } from "../services/authentication";
 
-const StyledLabel = styled.label``;
-const StyledInput = styled.input``;
+const StForm = styled.form`
+  display: grid;
+  justify-content: center;
+  margin-top: 100px;
+`;
+
+const StyledLabel = styled.label`
+  padding: 10px;
+`;
+const StyledInput = styled.input`
+  color: white;
+  padding: 5px;
+  border-bottom: 1px solid white;
+  border-right: none;
+  background-color: transparent;
+  width: 400px;
+  margin-bottom: 20px;
+`;
 
 const validateInput = (email, pw) => {
   if (!email || !pw) {
@@ -51,7 +67,7 @@ const Signin = () => {
 
   return (
     <>
-      <form onSubmit={submitHandler}>
+      <StForm onSubmit={submitHandler}>
         <StyledLabel htmlFor="email">이메일</StyledLabel>
         <StyledInput
           id="email"
@@ -67,7 +83,7 @@ const Signin = () => {
           value={pw}
         />
         <Button>로그인</Button>
-      </form>
+      </StForm>
     </>
   );
 };

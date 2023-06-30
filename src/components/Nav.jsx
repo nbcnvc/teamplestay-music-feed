@@ -7,9 +7,7 @@ const Nav = () => {
 
   return (
     <Container>
-      <Link to="/">
-        Teamplestay
-      </Link>
+      <Link to="/">Teamplestay</Link>
       {isAuthenticated ? (
         <div>
           <Link to="auth/profile">profile </Link>
