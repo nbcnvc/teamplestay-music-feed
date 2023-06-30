@@ -41,8 +41,8 @@ const Profile = () => {
       imageContainer.innerHTML = ""; // 기존의 내용을 지우고
 
       // 이미지 박스에 스타일 적용
-      imgBox.style.maxWidth = "250px";
-      imgBox.style.maxHeight = "250px";
+      imgBox.style.width = "250px";
+      imgBox.style.height = "250px";
       imgBox.style.borderRadius = "50%";
       imgBox.style.margin = "50px 0px 50px 0px";
       imgBox.style.overflow = "hidden"; // 이미지가 박스를 벗어나지 않도록 설정
@@ -99,25 +99,20 @@ const Profile = () => {
 
       {/* ----- My Post List ------  */}
       <PostContainer>
-        {
-          posts
-            .filter((post) => {
-              const currentUserId = auth.currentUser.uid;
-              return post.userId === currentUserId;
-            })
-            .map((post) => {
-              return (
-                <Card post={post} key={post.id}>
-                  <p>{post.title}</p>
-                  <p>{post.artist}</p>
-                  <p>{post.review}</p>
-                </Card>
-              );
-            })
-          // .map((post) => (
-          //   <Card key={post.id} post={post} />
-          // ))
-        }
+        {posts
+          .filter((post) => {
+            const currentUserId = auth.currentUser.uid;
+            return post.userId === currentUserId;
+          })
+          .map((post) => {
+            return (
+              <Card post={post} key={post.id}>
+                <p>{post.title}</p>
+                <p>{post.artist}</p>
+                <p>{post.review}</p>
+              </Card>
+            );
+          })}
       </PostContainer>
     </Container>
   );
