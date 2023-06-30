@@ -27,7 +27,7 @@ function Posts() {
   }, []);
 
   const incrementLike = (postId) => {
-    dispatch(postsApiAction.actionIncrementLike({ postId }));
+    dispatch(postsApiAction.actionIncrementLike(postId));
   };
 
   const deletePost = (postId) => {
@@ -35,21 +35,10 @@ function Posts() {
     dispatch(postsApiAction.actionDeletePost(postId));
   };
 
+  console.log('===>', posts)
+
   return (
     <>
-      <iframe
-        style={{
-          width: "100%",
-          height: "650px",
-          opacity: "1",
-          pointerEvents: "none",
-          marginBottom: "50px",
-        }}
-        frameborder="0"
-        src="https://www.youtube.com/embed/ewxYV67Gtn4?mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
-      ></iframe>
       <h2
         style={{
           color: "white",
@@ -88,9 +77,12 @@ export default Posts;
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
+
+  margin: 0 auto;
+  max-width: 1200px;
 `;
 
 const StPost = styled.div`

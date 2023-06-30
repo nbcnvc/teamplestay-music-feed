@@ -16,8 +16,9 @@ export const getDataFromFS = async () => {
   return docArr.docs;
 };
 
-export const createData = (post) => {
-  addDoc(COLLECTION, post);
+export const createData = async (post) => {
+  const docRef = await addDoc(COLLECTION, post);
+  return docRef;
 };
 
 export const updateData = async (postId, updatedData) => {
