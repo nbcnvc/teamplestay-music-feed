@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { styled } from "styled-components";
+
+import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
 
 const PostDetail = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const post = location.state?.post;
-  const navigate = useNavigate();
+
   const [editedPost, setEditedPost] = useState(post);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -27,6 +31,7 @@ const PostDetail = () => {
 
   const handleSave = () => {
     setIsEditing(false);
+    dispatch(postsApiAction.actionEditPost(editedPost)) 
   };
 
   return (

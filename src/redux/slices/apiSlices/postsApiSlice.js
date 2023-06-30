@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setDoc } from "firebase/firestore";
+import { updateData } from "../../../services/firestore";
 
 const NAMESPACE = "postsApi";
 
 const initialState = {
-  posts: []
+  posts: [],
 };
 
 const postsApiSlice = createSlice({
@@ -11,7 +13,24 @@ const postsApiSlice = createSlice({
   initialState: initialState,
   reducers: {
     actionUpdateAllPosts(state, action) {
-      state.posts = action.payload
+      state.posts = action.payload;
+    },
+    actionEditPost(state, action) {
+      const newPost = action.payload;
+      state.posts = state.posts.map((post) => {
+        if (post.id === newPost.id) {
+          updateData(newPost.id, newPost);
+          return newPost;
+        }
+        return post;
+      });
+    },
+    actionIncrementLike(state, action) {
+      const { postId } = action.payload;
+      const post = state.posts.find((post) => post.id === postId);
+      if (post) {
+        post.like += 1;
+      }
     },
   },
 });
