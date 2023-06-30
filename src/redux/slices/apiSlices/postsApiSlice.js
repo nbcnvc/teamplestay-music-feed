@@ -29,6 +29,10 @@ const postsApiSlice = createSlice({
       const newPosts = [...state.posts, newPost]
       state.posts = newPosts
     },
+    actionDeletePost(state, action) {
+      const postId = action.payload; 
+      state.posts = state.posts.filter(p => p.id !== postId)
+    },
     actionIncrementLike(state, action) {
       const { postId } = action.payload;
       const post = state.posts.find((post) => post.id === postId);

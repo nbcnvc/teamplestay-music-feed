@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "./ui/Button";
 
 import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
-import { getDataFromFS } from "../services/firestore";
+import { deleteData, getDataFromFS } from "../services/firestore";
 
 import NewPost from "./NewPost";
 
@@ -31,9 +31,8 @@ function Posts() {
   };
 
   const deletePost = (postId) => {
-    // 삭제 로직 구현
-    const newPosts = posts.filter((post) => post.id !== postId);
-    dispatch(postsApiAction.actionUpdateAllPosts(newPosts));
+    deleteData(postId)
+    dispatch(postsApiAction.actionDeletePost(postId));
   };
 
   return (
