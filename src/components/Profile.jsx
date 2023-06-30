@@ -40,6 +40,8 @@ const Profile = () => {
     if (imagePreview) {
       imagePreview.src = URL.createObjectURL(selectedFile);
     }
+
+    alert("업로드되었습니다!");
   };
 
   // 이미지 화면에 렌더링
@@ -110,7 +112,7 @@ const Profile = () => {
         </ProfileBox>
       </ProfileContainer>
       {/* ----- My Post List ------  */}
-      <StText>POST</StText>
+      <StText style={{ marginBottom: "30px" }}>POST</StText>
       <PostContainer>
         <PostBox>
           {posts
