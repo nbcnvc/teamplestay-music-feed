@@ -1,9 +1,20 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 
+import { authApiAction } from "../redux/slices/apiSlices/authApiSlice";
+import { signout } from "../services/authentication";
+
 const Nav = () => {
+  const dispatch = useDispatch();
+
   const isAuthenticated = useSelector((state) => state.authApi.isAuthenticated);
+
+  const signoutHandler = () => {
+    signout();
+    alert('로그아웃 했습니다.')
+    dispatch(authApiAction.actionSignout())
+  }
 
   return (
     <Container>
@@ -11,7 +22,7 @@ const Nav = () => {
       {isAuthenticated ? (
         <div>
           <Link to="auth/profile">🧑🏻‍👩🏻‍👧🏻profile </Link>
-          <Link to="auth/signout">🔓signout</Link>
+          <Link onClick={signoutHandler}>🔓signout</Link>
         </div>
       ) : (
         <div>

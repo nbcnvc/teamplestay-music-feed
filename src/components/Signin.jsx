@@ -6,6 +6,7 @@ import Button from "./ui/Button";
 import SignForm from "./ui/SignForm";
 import { authApiAction } from "../redux/slices/apiSlices/authApiSlice";
 import { signin } from "../services/authentication";
+import { useNavigate } from "react-router-dom";
 
 const StForm = styled.form`
   display: grid;
@@ -38,6 +39,7 @@ const validateInput = (email, pw) => {
 
 const Signin = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
@@ -58,9 +60,13 @@ const Signin = () => {
     dispatch(authApiAction.actionRequestedLogin());
 
     try {
-      await signin(email, pw);
+      const res = await signin(email, pw);
+      const accessToken = res.user.accessToken
+
       dispatch(authApiAction.actionSuccessLogin());
       alert(`로그인에 성공하셨습니다.`);
+      localStorage.setItem('accessToken', accessToken)
+      navigate('/')
     } catch (error) {
       console.log(error);
       dispatch(authApiAction.actionFailedLogin(error.message));

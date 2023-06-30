@@ -60,6 +60,7 @@ function Posts() {
     setTitle("");
     setArtist("");
     setReview("");
+    alert("등록되었습니다")
   };
 
   return (
@@ -92,7 +93,7 @@ function Posts() {
             setReview(e.target.value);
           }}
         />
-        <Button onClick={() => alert("등록되었습니다")}>등록하기</Button>
+        <Button>등록하기</Button>
       </StForm>
     </div>
   );
