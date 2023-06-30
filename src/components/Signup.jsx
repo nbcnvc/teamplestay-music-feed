@@ -4,10 +4,7 @@ import styled from "styled-components";
 
 import Button from "./ui/Button";
 import { signup } from "../services/authentication";
-import { authApiAction } from "../redux/slices/apiSlices/authApiSlice"
-
-const StyledLabel = styled.label``;
-const StyledInput = styled.input``;
+import { authApiAction } from "../redux/slices/apiSlices/authApiSlice";
 
 const validateInput = (email, pw) => {
   if (!email || !pw) {
@@ -44,7 +41,7 @@ const Signup = () => {
 
   return (
     <>
-      <form onSubmit={submitHandler}>
+      <StForm onSubmit={submitHandler}>
         <StyledLabel htmlFor="email">이메일</StyledLabel>
         <StyledInput id="email" onChange={changeEmailHandler} value={email} />
         <StyledLabel htmlFor="pw">비밀번호</StyledLabel>
@@ -55,9 +52,28 @@ const Signup = () => {
           type="password"
         />
         <Button>회원가입</Button>
-      </form>
+      </StForm>
     </>
   );
 };
 
 export default Signup;
+
+const StForm = styled.form`
+  display: grid;
+  justify-content: center;
+  margin-top: 100px;
+`;
+
+const StyledLabel = styled.label`
+  padding: 10px;
+`;
+const StyledInput = styled.input`
+  color: white;
+  padding: 5px;
+  border-bottom: 1px solid white;
+  border-right: none;
+  background-color: transparent;
+  width: 400px;
+  margin-bottom: 20px;
+`;
