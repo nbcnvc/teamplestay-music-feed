@@ -31,7 +31,7 @@ function Posts() {
   };
 
   const deletePost = (postId) => {
-    deleteData(postId)
+    deleteData(postId);
     dispatch(postsApiAction.actionDeletePost(postId));
   };
 
@@ -43,7 +43,6 @@ function Posts() {
           height: "650px",
           marginTop: "0",
           marginBottom: "auto",
-          opacity: "0.5",
           pointerEvents: "none",
           marginBottom: "50px",
         }}
@@ -80,7 +79,7 @@ function Posts() {
 export default Posts;
 
 const Container = styled.div`
-  diaplay: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
 `;
