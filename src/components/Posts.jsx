@@ -39,11 +39,8 @@ function Posts() {
     <>
       <iframe
         style={{
-          // position: "fixed",
-          // zIndex: "-99",
           width: "100%",
           height: "650px",
-          // backgroundSize: "cover",
           marginTop: "0",
           marginBottom: "auto",
           opacity: "0.5",
