@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Button from "./ui/Button";
 import { signup } from "../services/authentication";
 import { authApiAction } from "../redux/slices/apiSlices/authApiSlice";
+import { useNavigate } from "react-router-dom";
 
 const validateInput = (email, pw) => {
   if (!email || !pw) {
@@ -16,6 +17,7 @@ const validateInput = (email, pw) => {
 
 const Signup = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
@@ -37,6 +39,7 @@ const Signup = () => {
     await signup(email, pw);
     dispatch(authApiAction.actionSuccessSignup());
     alert(`회원가입에 성공하셨습니다.`);
+    navigate('/')
   };
 
   return (
