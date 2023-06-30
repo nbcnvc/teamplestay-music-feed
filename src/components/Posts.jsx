@@ -41,8 +41,7 @@ function Posts() {
         style={{
           width: "100%",
           height: "650px",
-          marginTop: "0",
-          marginBottom: "auto",
+          opacity: "1",
           pointerEvents: "none",
           marginBottom: "50px",
         }}
@@ -51,26 +50,35 @@ function Posts() {
         allow="autoplay; encrypted-media"
         allowfullscreen
       ></iframe>
+      <h2
+        style={{
+          color: "white",
+          fontSize: "20px",
+          textAlign: "center",
+        }}
+      >
+        💛오늘의 추천 음악을 알려주세요💛
+      </h2>
+      <NewPost />
+
       <Container>
-        <NewPost />
-        <PostContainer>
-          {posts.map((post) => (
-            <StPost key={post.id}>
-              <p>🤍 {post.like}</p>
-              <br />
-              <Link to={`posts/${post.id}`} state={{ post: post }}>
-                <p style={{ color: "white" }}>{post.title}</p>
-                <p style={{ color: "white" }}>{post.artist}</p>
-                <p style={{ color: "white" }}>{post.review}</p>
-              </Link>
-              <br />
-              <StButtonLayout>
-                <Button onClick={() => deletePost(post.id)}>삭제</Button>
-                <Button onClick={() => incrementLike(post.id)}>좋아요</Button>
-              </StButtonLayout>
-            </StPost>
-          ))}
-        </PostContainer>
+        {posts.map((post) => (
+          <StPost key={post.id}>
+            <p>🤍 {post.like}</p>
+            <br />
+            <Link to={`posts/${post.id}`} state={{ post: post }}>
+              <p style={{ color: "white" }}>
+                {post.title} - {post.artist}
+              </p>
+              <p style={{ color: "white" }}>{post.review}</p>
+            </Link>
+            <br />
+            <StButtonLayout>
+              <Button onClick={() => deletePost(post.id)}>삭제</Button>
+              <Button onClick={() => incrementLike(post.id)}>좋아요</Button>
+            </StButtonLayout>
+          </StPost>
+        ))}
       </Container>
     </>
   );
@@ -80,8 +88,9 @@ export default Posts;
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
 `;
 
 const StPost = styled.div`
@@ -90,19 +99,9 @@ const StPost = styled.div`
   padding: 20px;
   cursor: pointer;
   flex-wrap: wrap;
-`;
-
-const PostContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-
-  margin: 0 auto;
-  max-width: 1200px;
+  text-align: center;
 `;
 
 const StButtonLayout = styled.div`
   display: flex;
-  justify-content: center;
 `;
