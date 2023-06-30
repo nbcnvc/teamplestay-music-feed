@@ -38,6 +38,25 @@ function Posts() {
 
   return (
     <>
+      <iframe
+        style={{
+          // position: "fixed",
+          // zIndex: "-99",
+          width: "100%",
+          height: "650px",
+          // backgroundSize: "cover",
+          marginTop: "0",
+          marginBottom: "auto",
+          opacity: "0.5",
+          pointerEvents: "none",
+          marginBottom: "50px",
+        }}
+        frameborder="0"
+        src="https://www.youtube.com/embed/ewxYV67Gtn4?mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+      ></iframe>
+      <NewPost />
       <Container>
         <iframe
           style={{
