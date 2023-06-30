@@ -3,12 +3,14 @@ import { addDoc, collection, getDocs, query } from "firebase/firestore";
 import { db } from "../services/firebase";
 import styled from "styled-components";
 import { auth } from "../services/firebase";
-import Card from "./ui/Card";
 
 import Button from "./ui/Button";
-import { findAllInRenderedTree } from "react-dom/test-utils";
+import { useDispatch } from "react-redux";
+import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
 
 function Posts() {
+  const dispatch = useDispatch();
+
   const [posts, setPosts] = useState([]);
 
   const [artist, setArtist] = useState("");
@@ -53,11 +55,13 @@ function Posts() {
 
     // 업데이트된 데이터를 현재 상태의 posts에 추가하여 업데이트
     setPosts((prev) => [...prev, updatedPost]);
+    dispatch(postsApiAction.actionAddPost(newPost));
 
     setTitle("");
     setArtist("");
     setReview("");
   };
+
   const incrementLike = (postId) => {
     setPosts((prev) => {
       return prev.map((post) => {

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { setDoc } from "firebase/firestore";
 import { updateData } from "../../../services/firestore";
 
 const NAMESPACE = "postsApi";
@@ -24,6 +23,11 @@ const postsApiSlice = createSlice({
         }
         return post;
       });
+    },
+    actionAddPost(state, action) {
+      const newPost = action.payload;
+      const newPosts = [...state.posts, newPost]
+      state.posts = newPosts
     },
     actionIncrementLike(state, action) {
       const { postId } = action.payload;
