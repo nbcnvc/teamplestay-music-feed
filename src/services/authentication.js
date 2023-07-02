@@ -19,3 +19,7 @@ export const signin = async (email, pw) => {
 export const signout = async () => {
   await signOut(auth);
 };
+
+export const setToken = async (token) => {
+  localStorage.setItem("accessToken", token);
+};

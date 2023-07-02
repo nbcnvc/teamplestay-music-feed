@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import Button from "./ui/Button";
 import { authApiAction } from "../redux/slices/apiSlices/authApiSlice";
-import { signin } from "../services/authentication";
+import { setToken, signin } from "../services/authentication";
 import { useNavigate } from "react-router-dom";
 
 const StForm = styled.form`
@@ -63,8 +63,8 @@ const Signin = () => {
       const accessToken = res.user.accessToken
 
       dispatch(authApiAction.actionSuccessLogin());
+      setToken(accessToken)
       alert(`로그인에 성공하셨습니다.`);
-      localStorage.setItem('accessToken', accessToken)
       navigate('/')
     } catch (error) {
       console.log(error);
