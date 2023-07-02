@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "./ui/Button";
 
 import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
-import { deleteData, getData, getDataFromFS, updateLike } from "../services/firestore";
+import { deleteData, getDataFromFS, updateLike } from "../services/firestore";
 
 import NewPost from "./NewPost";
 
@@ -24,7 +24,7 @@ function Posts() {
       dispatch(postsApiAction.actionUpdateAllPosts(fetchedData));
     };
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   const incrementLike = async (postId) => {
     updateLike(postId)

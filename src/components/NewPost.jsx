@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "../services/firebase";
 import styled from "styled-components";
 import { auth } from "../services/firebase";
@@ -94,12 +94,6 @@ function Posts() {
 }
 
 export default Posts;
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-`;
 
 const StForm = styled.form`
   margin: 20px auto;
