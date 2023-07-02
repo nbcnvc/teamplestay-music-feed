@@ -5,6 +5,8 @@ import { styled } from "styled-components";
 import Button from "./ui/Button";
 
 import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
+import { PostBox, PostContainer, ReviewBox, StPost } from "./ui/Post";
+import { BigText, SmallText, Text } from "./ui/Text";
 
 const PostDetail = () => {
   const location = useLocation();
@@ -37,55 +39,86 @@ const PostDetail = () => {
 
   return (
     <Container>
-      <h1>⭐오늘의 pick⭐</h1>
-      {isEditing ? (
-        <StForm>
-          <StBox>
-            <label>
-              Title:
-              <StInput
-                type="text"
-                value={editedPost.title}
-                onChange={handleTitleChange}
-              />
-            </label>
-            <br />
-            <label>
-              Artist:
-              <StInput
-                type="text"
-                value={editedPost.artist}
-                onChange={handleArtistChange}
-              />
-            </label>
-            <br />
-            <label>
-              Review:
-              <StInput
-                value={editedPost.review}
-                onChange={handleReviewChange}
-              ></StInput>
-            </label>
-            <br />
-            <Button type="button" onClick={handleSave}>
-              Save
-            </Button>
-          </StBox>
-        </StForm>
-      ) : (
-        <>
-          <StContainer>
-            <StBox>
-              <p>Title: {editedPost.title}</p>
-              <p>Artist: {editedPost.artist}</p>
-              <p>Review: {editedPost.review}</p>
-              <Button type="button" onClick={handleEdit}>
-                수정하기
+      <BigText>EDIT</BigText>
+      <PostContainer style={{ marginTop: "30px" }}>
+        {isEditing ? (
+          <PostBox>
+            <StPost>
+              <label>
+                <p>Title</p>
+                <StInput
+                  type="text"
+                  value={editedPost.title}
+                  onChange={handleTitleChange}
+                />
+              </label>
+              <br />
+              <label>
+                <p>Artist</p>
+                <StInput
+                  type="text"
+                  value={editedPost.artist}
+                  onChange={handleArtistChange}
+                />
+              </label>
+              <br />
+              <label>
+                <p>Review</p>
+                <StInput
+                  value={editedPost.review}
+                  onChange={handleReviewChange}
+                ></StInput>
+              </label>
+              <br />
+              <Button
+                style={{ marginTop: "40px" }}
+                type="button"
+                onClick={handleSave}
+              >
+                저장하기
               </Button>
-            </StBox>
-          </StContainer>
-        </>
-      )}
+            </StPost>
+          </PostBox>
+        ) : (
+          <>
+            <div>
+              <StPost>
+                <Text
+                  style={{
+                    paddingTop: "5px",
+                  }}
+                >
+                  {editedPost.title}
+                </Text>
+                <BigText
+                  style={{
+                    paddingBottom: "25px",
+                    borderBottom: "1px solid white",
+                  }}
+                >
+                  {editedPost.artist}
+                </BigText>
+                <ReviewBox>
+                  <SmallText
+                    style={{
+                      paddingTop: "30px",
+                    }}
+                  >
+                    {editedPost.review}
+                  </SmallText>
+                </ReviewBox>
+                <Button
+                  style={{ marginTop: "50px" }}
+                  type="button"
+                  onClick={handleEdit}
+                >
+                  수정하기
+                </Button>
+              </StPost>
+            </div>
+          </>
+        )}
+      </PostContainer>
     </Container>
   );
 };
@@ -97,29 +130,11 @@ const Container = styled.nav`
   align-items: center;
   text-align: center;
   justify-content: center;
-`;
-
-const StBox = styled.div`
-  border: 1px solid white;
-  padding: 40px;
-  margin-top: 20px;
-  border-radius: 10px;
-
-  /* align-items: center;
-  justify-content: center; */
-  width: 250px;
-`;
-
-const StContainer = styled.div`
-  /* padding-top: 50ps; */
+  margin-top: 30px;
 `;
 
 const StInput = styled.input`
+  width: 210px;
   padding: 10px;
   margin: 10px;
-`;
-
-const StForm = styled.form`
-  display: grid;
-  place-content: left;
 `;

@@ -17,7 +17,7 @@ const validateInput = (email, pw) => {
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
@@ -39,7 +39,7 @@ const Signup = () => {
     await signup(email, pw);
     dispatch(authApiAction.actionSuccessSignup());
     alert(`회원가입에 성공하셨습니다.`);
-    navigate('/')
+    navigate("/");
   };
 
   return (
@@ -54,7 +54,18 @@ const Signup = () => {
           value={pw}
           type="password"
         />
-        <Button>회원가입</Button>
+        <div style={{ textAlign: "center" }}>
+          <Button
+            style={{
+              marginTop: "50px",
+              width: "370px",
+              height: "50px",
+              fontSize: "15px",
+            }}
+          >
+            회원가입
+          </Button>
+        </div>
       </StForm>
     </>
   );
@@ -69,14 +80,17 @@ const StForm = styled.form`
 `;
 
 const StyledLabel = styled.label`
-  padding: 10px;
+  margin-bottom: 15px;
 `;
 const StyledInput = styled.input`
   color: white;
-  padding: 5px;
+  padding: 10px;
   border-bottom: 1px solid white;
   border-right: none;
+  border-left: none;
+  border-top: none;
   background-color: transparent;
-  width: 400px;
-  margin-bottom: 20px;
+  width: 350px;
+  height: 20px;
+  margin-bottom: 50px;
 `;

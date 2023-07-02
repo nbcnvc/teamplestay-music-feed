@@ -39,7 +39,13 @@ function Posts() {
       return;
     }
 
-    const newPost = { userId: auth.currentUser.uid, title, artist, review, like: 0 };
+    const newPost = {
+      userId: auth.currentUser.uid,
+      title,
+      artist,
+      review,
+      like: 0,
+    };
     const docRef = await createData(newPost);
     newPost.id = docRef.id;
 
@@ -54,7 +60,7 @@ function Posts() {
     setTitle("");
     setArtist("");
     setReview("");
-    alert("등록되었습니다")
+    alert("등록되었습니다");
   };
 
   return (
@@ -64,7 +70,7 @@ function Posts() {
           type="text"
           name="title"
           value={title}
-          placeholder="가수"
+          placeholder="  Artist"
           onChange={(e) => {
             setTitle(e.target.value);
           }}
@@ -73,7 +79,7 @@ function Posts() {
           type="text"
           name="artist"
           value={artist}
-          placeholder="제목"
+          placeholder="  Title"
           onChange={(e) => {
             setArtist(e.target.value);
           }}
@@ -82,7 +88,7 @@ function Posts() {
           type="text"
           name="review"
           value={review}
-          placeholder="리뷰"
+          placeholder="  Review"
           onChange={(e) => {
             setReview(e.target.value);
           }}
@@ -95,14 +101,7 @@ function Posts() {
 
 export default Posts;
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-`;
-
 const StForm = styled.form`
-  margin: 20px auto;
   padding: 10px;
   display: flex;
   align-items: center;
@@ -110,17 +109,22 @@ const StForm = styled.form`
   gap: 5px;
   /* position: fixed; */
   width: 100%;
-  max-width: 1200px;
+  max-width: 1040px;
   min-width: 800px;
+  /* border-radius: 10px; */
+  /* background-color: white; */
+  margin: 20px auto 80px auto;
+  /* opacity: 0.5;  */
 `;
 
 const StInput = styled.input`
-  color: white;
-  margin: 20px 5px;
+  color: black;
+  width: 300px;
   height: 30px;
   border: 1px solid white;
-  background-color: transparent;
-  width: 220px;
+  border-radius: 8px;
+  /* background-color: transparent; */
+  margin: 10px 10px 10px 0px;
 
   .placeholder {
     color: white;

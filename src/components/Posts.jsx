@@ -1,13 +1,19 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "./ui/Button";
 
 import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
-import { deleteData, getData, getDataFromFS, updateLike } from "../services/firestore";
+import {
+  deleteData,
+  getData,
+  getDataFromFS,
+  updateLike,
+} from "../services/firestore";
 
 import NewPost from "./NewPost";
+import { PostBox, PostContainer, ReviewBox, StPost } from "./ui/Post";
+import { BigText, HeaderText, SmallText, Text } from "./ui/Text";
 
 function Posts() {
   const dispatch = useDispatch();
@@ -27,7 +33,7 @@ function Posts() {
   }, []);
 
   const incrementLike = async (postId) => {
-    updateLike(postId)
+    updateLike(postId);
     dispatch(postsApiAction.actionIncrementLike(postId));
   };
 
@@ -38,6 +44,38 @@ function Posts() {
 
   return (
     <>
+      <div style={{ position: "relative" }}>
+        <div style={{ position: "relative", zIndex: "1" }}>
+          <HeaderText style={{ marginTop: "60px" }}>Music</HeaderText>
+          <HeaderText style={{ marginBottom: "350px" }}>Pick</HeaderText>
+          <HeaderText></HeaderText>
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: "-12%",
+            left: 0,
+            width: "100%",
+          }}
+        >
+          <iframe
+            style={{
+              width: "100%",
+              height: "600px",
+              opacity: "0.5",
+              pointerEvents: "none",
+              marginBottom: "50px",
+              zIndex: "2",
+              // flex: "grid",
+            }}
+            frameborder="0"
+            src="https://www.youtube.com/embed/ewxYV67Gtn4?mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=0"
+            title="뮤직비디오 영상 "
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
       <h2
         style={{
           color: "white",
@@ -45,53 +83,57 @@ function Posts() {
           textAlign: "center",
         }}
       >
-        💛오늘의 추천 음악을 알려주세요💛
+        여러분의 추천 음악을 알려주세요 ! ♫
       </h2>
       <NewPost />
-
-      <Container>
-        {posts.map((post) => (
-          <StPost key={post.id}>
-            <p>🤍 {post.like}</p>
-            <br />
-            <Link to={`posts/${post.id}`} state={{ post: post }}>
-              <p style={{ color: "white" }}>
-                {post.title} - {post.artist}
-              </p>
-              <p style={{ color: "white" }}>{post.review}</p>
-            </Link>
-            <br />
-            <StButtonLayout>
-              <Button onClick={() => deletePost(post.id)}>삭제</Button>
-              <Button onClick={() => incrementLike(post.id)}>좋아요</Button>
-            </StButtonLayout>
-          </StPost>
-        ))}
-      </Container>
+      <PostContainer style={{ marginBottom: "100px" }}>
+        <PostBox>
+          {posts.map((post) => (
+            <StPost key={post.id}>
+              <p>🤍 {post.like}</p>
+              <br />
+              <Link to={`posts/${post.id}`} state={{ post: post }}>
+                <Text
+                  style={{
+                    paddingTop: "5px",
+                  }}
+                >
+                  {post.title}
+                </Text>
+                <BigText
+                  style={{
+                    paddingBottom: "25px",
+                    borderBottom: "1px solid white",
+                  }}
+                >
+                  {post.artist}
+                </BigText>
+                <ReviewBox>
+                  <SmallText
+                    style={{
+                      paddingTop: "30px",
+                    }}
+                  >
+                    {post.review}
+                  </SmallText>
+                </ReviewBox>
+              </Link>
+              <br />
+              <div>
+                <Button
+                  style={{ marginRight: "10px" }}
+                  onClick={() => deletePost(post.id)}
+                >
+                  삭제
+                </Button>
+                <Button onClick={() => incrementLike(post.id)}>좋아요</Button>
+              </div>
+            </StPost>
+          ))}
+        </PostBox>
+      </PostContainer>
     </>
   );
 }
 
 export default Posts;
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-
-  margin: 0 auto;
-  max-width: 1200px;
-`;
-
-const StPost = styled.div`
-  width: 300px;
-  border: 1px solid white;
-  padding: 20px;
-  cursor: pointer;
-  flex-wrap: wrap;
-  text-align: center;
-`;
-
-const StButtonLayout = styled.div`
-`;

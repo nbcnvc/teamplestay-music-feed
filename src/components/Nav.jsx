@@ -12,22 +12,32 @@ const Nav = () => {
 
   const signoutHandler = () => {
     signout();
-    alert('로그아웃 했습니다.')
-    dispatch(authApiAction.actionSignout())
-  }
+    alert("로그아웃 했습니다.");
+    dispatch(authApiAction.actionSignout());
+  };
 
   return (
     <Container>
-      <Link to="/">Teamplestay</Link>
+      <Link style={{ fontWeight: "bold" }} to="/">
+        Teamplestay
+      </Link>
       {isAuthenticated ? (
         <div>
-          <Link to="auth/profile">🧑🏻‍👩🏻‍👧🏻profile </Link>
-          <Link onClick={signoutHandler}>🔓signout</Link>
+          <Link style={{ fontWeight: "bold" }} to="auth/profile">
+            ⚙️ Profile{" "}
+          </Link>
+          <Link style={{ fontWeight: "bold" }} onClick={signoutHandler}>
+            🔓 Signout
+          </Link>
         </div>
       ) : (
         <div>
-          <Link to="auth/signup">🎉signup</Link>
-          <Link to="auth/signin">🔒signin</Link>
+          <Link style={{ fontWeight: "bold" }} to="auth/signup">
+            🎉 Signup
+          </Link>
+          <Link style={{ fontWeight: "bold" }} to="auth/signin">
+            🔒 Signin
+          </Link>
         </div>
       )}
     </Container>
