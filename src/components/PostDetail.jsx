@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { styled } from "styled-components";
-import Button from "./ui/Button";
 
 import { postsApiAction } from "../redux/slices/apiSlices/postsApiSlice";
 import { PostBox, PostContainer, ReviewBox, StPost } from "./ui/Post";
 import { BigText, SmallText, Text } from "./ui/Text";
+import Button from "./ui/Button";
+import { auth } from "../services/firebase";
 
 const PostDetail = () => {
   const location = useLocation();
@@ -29,6 +30,10 @@ const PostDetail = () => {
   };
 
   const handleEdit = () => {
+    if (auth.currentUser.uid != editedPost.userId) {
+      alert('내가 작성한 게시물만 수정할 수 있습니다.')
+      return
+    }
     setIsEditing(true);
   };
 
@@ -64,10 +69,10 @@ const PostDetail = () => {
               <br />
               <label>
                 <p>Review</p>
-                <StInput
+                <StTextArea
                   value={editedPost.review}
                   onChange={handleReviewChange}
-                ></StInput>
+                ></StTextArea>
               </label>
               <br />
               <Button
@@ -134,6 +139,12 @@ const Container = styled.nav`
 `;
 
 const StInput = styled.input`
+  width: 210px;
+  padding: 10px;
+  margin: 10px;
+`;
+
+const StTextArea = styled.textarea`
   width: 210px;
   padding: 10px;
   margin: 10px;
