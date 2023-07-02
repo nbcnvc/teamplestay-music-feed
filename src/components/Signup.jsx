@@ -17,7 +17,7 @@ const validateInput = (email, pw) => {
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
@@ -39,7 +39,7 @@ const Signup = () => {
     await signup(email, pw);
     dispatch(authApiAction.actionSuccessSignup());
     alert(`회원가입에 성공하셨습니다.`);
-    navigate('/')
+    navigate("/");
   };
 
   return (

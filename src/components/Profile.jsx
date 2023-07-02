@@ -5,6 +5,8 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 import { auth } from "../services/firebase";
 import { storage } from "../services/firebase";
+import { PostBox, PostContainer, StPost } from "./ui/Post";
+import { BigText, SmallText, Text } from "./ui/Text";
 
 const Profile = () => {
   const posts = useSelector((state) => state.postsApi.posts);
@@ -87,8 +89,8 @@ const Profile = () => {
   return (
     <Container>
       <ProfileContainer>
-        <StBigText>MY PAGE</StBigText>
-        <StText>PROFILE</StText>
+        <BigText style={{ paddingBottom: "20px" }}>MY PAGE</BigText>
+        <Text style={{ marginBottom: "15px" }}>PROFILE</Text>
 
         <ProfileBox>
           {/* ------ Change Image ------  */}
@@ -102,18 +104,18 @@ const Profile = () => {
             {modalOpen && (
               <Modal>
                 <InputBox type="file" onChange={handleFileSelect} />
-                <StAlign>
+                <ButtonBox>
                   <StButton onClick={handleUpload}>Upload</StButton>
                   <StButton onClick={() => setModalOpen(false)}>close</StButton>
-                </StAlign>
+                </ButtonBox>
               </Modal>
             )}
           </div>
         </ProfileBox>
       </ProfileContainer>
       {/* ----- My Post List ------  */}
-      <StText style={{ marginBottom: "30px" }}>POST</StText>
-      <PostContainer>
+      <Text style={{ marginBottom: "15px" }}>MY POST</Text>
+      <PostContainer style={{ marginBottom: "100px" }}>
         <PostBox>
           {posts
             .filter((post) => {
@@ -127,25 +129,28 @@ const Profile = () => {
                 //   <p>{post.artist}</p>
                 //   <p>{post.review}</p>
                 // </StPost>
-                <StPost post={post} key={post.id}>
+                <StPost
+                  style={{ height: "200px", padding: "40px" }}
+                  post={post}
+                  key={post.id}
+                >
                   <br />
-                  <p
+                  <Text>{post.title}</Text>
+                  <BigText
                     style={{
-                      marginBottom: "20px",
-                      fontSize: "18px",
-                      textAlign: "center",
+                      paddingBottom: "25px",
+                      borderBottom: "1px solid white",
                     }}
                   >
-                    {post.title} - {post.artist}
-                  </p>
-                  <p
+                    {post.artist}
+                  </BigText>
+                  <SmallText
                     style={{
-                      textAlign: "center",
-                      fontSize: "18px",
+                      paddingTop: "30px",
                     }}
                   >
                     {post.review}
-                  </p>
+                  </SmallText>
                   <br />
                 </StPost>
               );
@@ -157,11 +162,12 @@ const Profile = () => {
 };
 export default Profile;
 
-// styled-components
 const Container = styled.div`
   text-align: center;
   margin-top: 30px;
 `;
+
+// -------- Profile ---------
 const ProfileContainer = styled.div`
   display: grid;
   align-items: center;
@@ -169,30 +175,19 @@ const ProfileContainer = styled.div`
   justify-content: center;
 `;
 const ProfileBox = styled.div`
-  border: 1px solid white;
+  width: 250px;
+  border: 4px solid white;
   padding: 40px;
-  margin-top: 20px;
   margin-bottom: 60px;
-  border-radius: 10px;
-
+  border-radius: 20px;
   align-items: center;
   justify-content: center;
-  width: 250px;
 `;
 const UserInfo = styled.div`
   margin: 50px 0px 20px 0px;
 `;
-const StAlign = styled.div`
-  margin-top: auto;
-  margin-bottom: 20px;
-`;
-const StButton = styled.button`
-  width: 250px;
-  height: 35px;
-  border-width: 0px;
-  border-radius: 8px;
-  margin-top: 10px;
-`;
+
+// -------- Modal ---------
 const Modal = styled.div`
   background: white;
   width: 300px;
@@ -206,34 +201,23 @@ const Modal = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const PostContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-`;
-const PostBox = styled.div`
-  display: flex;
 
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-`;
-const StPost = styled.div`
-  width: 300px;
-  border: 1px solid white;
-  padding: 20px;
-  cursor: pointer;
-`;
 const InputBox = styled.input`
   color: grey;
   align-self: flex-start;
   margin-top: 20px;
 `;
-const StBigText = styled.p`
-  font-size: 30px;
+
+const ButtonBox = styled.div`
+  margin-top: auto;
   margin-bottom: 20px;
+  /* align-items: flex-end; */
 `;
-const StText = styled.p`
-  font-size: 20px;
+
+const StButton = styled.button`
+  width: 250px;
+  height: 35px;
+  border-width: 0px;
+  border-radius: 8px;
+  margin-top: 10px;
 `;
