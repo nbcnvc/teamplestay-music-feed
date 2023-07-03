@@ -52,6 +52,15 @@ const Profile = () => {
       const imageContainer = document.querySelector(".image-container");
       imageContainer.innerHTML = ""; // 기존의 내용을 지우고
 
+      let imgUrl = "";
+      try {
+        const imgRef = ref(storage, `${auth.currentUser.uid}`);
+        imgUrl = await getDownloadURL(imgRef);
+        setDownloadURL(imgUrl);
+      } catch {
+        imgUrl = "";
+      }
+
       if (downloadURL !== "") {
         const imgBox = document.createElement("div"); // 이미지 박스 요소 생성
         const img = document.createElement("img"); // 이미지 요소 생성
@@ -89,7 +98,11 @@ const Profile = () => {
         defaultImg.style.objectFit = "cover";
         defaultImg.style.overflow = "hidden";
 
-        imageContainer.appendChild(defaultImg);
+        const defaultImgNode = document.querySelector(".default-img");
+        if (!defaultImgNode) {
+          imageContainer.appendChild(defaultImg);
+        }
+        // imageContainer.appendChild(defaultImg);
       }
     };
 
