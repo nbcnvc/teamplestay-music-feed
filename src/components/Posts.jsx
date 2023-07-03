@@ -33,7 +33,7 @@ function Posts() {
   };
 
   const deletePost = (postId) => {
-    if (window.confirm("정말 삭제하시겠습니까??") == true) {
+    if (window.confirm("정말 삭제하시겠습니까??") === true) {
       deleteData(postId);
       dispatch(postsApiAction.actionDeletePost(postId));
     } else {
