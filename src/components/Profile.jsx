@@ -28,7 +28,6 @@ const Profile = () => {
   // Modal - Upload 버튼 클릭 시, 이미지 업로드
   // uploadBytes() --> 이미지 업로드
   const handleUpload = async () => {
-    const ext = selectedFile.name.split(".").pop();
     const imageRef = ref(storage, `${auth.currentUser.uid}`);
     if (selectedFile) {
       await uploadBytes(imageRef, selectedFile);
@@ -102,7 +101,6 @@ const Profile = () => {
         if (!defaultImgNode) {
           imageContainer.appendChild(defaultImg);
         }
-        // imageContainer.appendChild(defaultImg);
       }
     };
 

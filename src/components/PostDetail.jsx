@@ -30,7 +30,7 @@ const PostDetail = () => {
   };
 
   const handleEdit = () => {
-    if (auth.currentUser.uid != editedPost.userId) {
+    if (auth.currentUser.uid !== editedPost.userId) {
       alert('내가 작성한 게시물만 수정할 수 있습니다.')
       return
     }
