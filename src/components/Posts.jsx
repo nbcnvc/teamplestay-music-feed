@@ -33,8 +33,12 @@ function Posts() {
   };
 
   const deletePost = (postId) => {
-    deleteData(postId);
-    dispatch(postsApiAction.actionDeletePost(postId));
+    if (window.confirm("정말 삭제하시겠습니까??") == true) {
+      deleteData(postId);
+      dispatch(postsApiAction.actionDeletePost(postId));
+    } else {
+      return false;
+    }
   };
 
   return (
